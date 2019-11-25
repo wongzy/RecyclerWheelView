@@ -1,4 +1,4 @@
-package com.wongzhenyu.recyclerwheelview
+package cn.wongzhenyu.recyclerwheelviewdemo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
