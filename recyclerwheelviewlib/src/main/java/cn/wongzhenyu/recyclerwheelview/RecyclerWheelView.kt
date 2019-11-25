@@ -11,6 +11,14 @@ class RecyclerWheelView : RecyclerView {
 
      }
 
+    constructor(context: Context) : super(context) {
+
+    }
+
+    constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr : Int) : super(context, attributeSet, defStyleAttr) {
+
+    }
+
     abstract class Adapter<VH : ViewHolder>: RecyclerView.Adapter<ViewHolder> {
         constructor() {
         }
