@@ -1,4 +1,4 @@
-package com.wongzhenyu.recyclerwheelview
+package com.wongzhenyu.recyclerwheelviewlib
 
 import org.junit.Test
 

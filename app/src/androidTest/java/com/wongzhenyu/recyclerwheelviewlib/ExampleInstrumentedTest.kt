@@ -1,4 +1,4 @@
-package com.wongzhenyu.recyclerwheelview
+package com.wongzhenyu.recyclerwheelviewlib
 
 import androidx.test.InstrumentationRegistry
 import androidx.test.runner.AndroidJUnit4

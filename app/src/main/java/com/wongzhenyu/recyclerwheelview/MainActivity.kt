@@ -1,8 +1,7 @@
-package com.wongzhenyu.recyclerwheelviewdemo
+package com.wongzhenyu.recyclerwheelview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.wongzhenyu.recyclerwheelview.R
 
 class MainActivity : AppCompatActivity() {
 
