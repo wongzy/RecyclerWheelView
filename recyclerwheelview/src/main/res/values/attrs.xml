@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RecyclerWheelView">
+        <attr name="wheelSelectedColor" format="color|reference" />
+        <attr name="wheelSelectedSize" format="dimension|reference" />
+        <attr name="wheelNormalSize" format="dimension|reference" />
+        <attr name="wheelNormalColor" format="color|reference" />
+    </declare-styleable>
+</resources>
