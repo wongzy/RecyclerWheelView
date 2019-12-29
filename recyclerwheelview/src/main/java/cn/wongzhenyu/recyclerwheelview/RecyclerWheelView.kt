@@ -7,6 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerWheelView : RecyclerView {
 
+    var wheelSelectedItemTextColor  = -1
+
+
+
+
+
      constructor(context: Context, attributeSet : AttributeSet?) : super(context, attributeSet) {
          init(context, attributeSet)
      }
@@ -21,6 +27,7 @@ class RecyclerWheelView : RecyclerView {
 
     private fun init(context: Context, attributeSet: AttributeSet?) {
         val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.RecyclerWheelView)
+//        wheelSelectedItemTextColor = attrs.getColor(R.styleable.RecyclerWheelView_wheelSelectedItemTextColor, )
         attrs.recycle()
     }
 }

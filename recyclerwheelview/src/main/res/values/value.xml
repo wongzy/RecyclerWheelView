@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="default_wheelSelectedItemTextColor">#4FC3F7</color>
+    <color name="default_wheelNormalTextColor">#BDBDBD</color>
+
+</resources>
