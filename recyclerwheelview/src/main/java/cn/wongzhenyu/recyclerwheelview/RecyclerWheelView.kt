@@ -9,11 +9,11 @@ class RecyclerWheelView : RecyclerView {
 
     private var wheelSelectedItemTextColor = -1
     private var wheelSelectedItemTextSize = -1
-    private var wheelSelectedItemBackground : Drawable? = null
+    private var wheelSelectedItemBackground: Drawable? = null
     private var wheelNormalTextSize = -1
     private var wheelNormalTextColor = -1
     private var wheelItemInterval = -1
-    private var wheelNormalItemBackground : Drawable? = null
+    private var wheelNormalItemBackground: Drawable? = null
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
         init(context, attributeSet)
