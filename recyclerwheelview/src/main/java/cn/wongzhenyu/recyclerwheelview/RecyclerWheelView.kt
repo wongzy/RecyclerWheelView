@@ -6,6 +6,11 @@ import android.util.AttributeSet
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
+/**
+ * github wongzy
+ * wongzhenyu96@gmail.com
+ * 2019-12-29
+ **/
 class RecyclerWheelView : RecyclerView {
 
     private var wheelSelectedItemTextColor = -1
