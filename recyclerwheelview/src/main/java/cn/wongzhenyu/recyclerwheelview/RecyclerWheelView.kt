@@ -3,6 +3,7 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 class RecyclerWheelView : RecyclerView {
@@ -60,5 +61,37 @@ class RecyclerWheelView : RecyclerView {
             R.styleable.RecyclerWheelView_wheelNormalItemBackground
         )
         attrs.recycle()
+    }
+}
+
+class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    private val typePadding = 0
+    private val typeItem = 1
+
+    private lateinit var itemList : List<IRecyclerWheelViewItem>
+
+    constructor(itemList : List<IRecyclerWheelViewItem>) {
+        this.itemList = itemList
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        if (position == 0 || position == itemList.size) {
+            return typePadding
+        }
+        return  typeItem
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getItemCount(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
