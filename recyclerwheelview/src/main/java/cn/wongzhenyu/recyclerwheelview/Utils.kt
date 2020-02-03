@@ -6,6 +6,7 @@ import android.content.res.Resources
  * github wongzy
  * wongzhenyu96@gmail.com
  * 2019-12-21
+ * Common utils in this project
  **/
 
 fun dp2px(dp : Float) : Float {

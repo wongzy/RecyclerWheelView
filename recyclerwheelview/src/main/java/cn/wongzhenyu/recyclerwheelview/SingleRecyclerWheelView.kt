@@ -3,7 +3,6 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
-import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -11,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
  * wongzhenyu96@gmail.com
  * 2019-12-29
  **/
-class RecyclerWheelView : RecyclerView {
+class SingleRecyclerWheelView : RecyclerView {
 
     private var wheelSelectedItemTextColor = -1
     private var wheelSelectedItemTextSize = -1
@@ -38,65 +37,33 @@ class RecyclerWheelView : RecyclerView {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet?) {
-        val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.RecyclerWheelView)
+        val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.SingleRecyclerWheelView)
         wheelSelectedItemTextColor = attrs.getColor(
-            R.styleable.RecyclerWheelView_wheelSelectedItemTextColor,
+            R.styleable.SingleRecyclerWheelView_wheelSelectedItemTextColor,
             resources.getColor(R.color.default_wheelSelectedItemTextColor)
         )
         wheelSelectedItemTextSize = attrs.getDimensionPixelSize(
-            R.styleable.RecyclerWheelView_wheelSelectedTextSize,
+            R.styleable.SingleRecyclerWheelView_wheelSelectedTextSize,
             sp2px(15.5f).toInt()
         )
         wheelSelectedItemBackground = attrs.getDrawable(
-            R.styleable.RecyclerWheelView_wheelSelectedItemBackground
+            R.styleable.SingleRecyclerWheelView_wheelSelectedItemBackground
         )
         wheelNormalTextSize = attrs.getDimensionPixelSize(
-            R.styleable.RecyclerWheelView_wheelNormalTextSize,
+            R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
             sp2px(13.5f).toInt()
         )
         wheelNormalTextColor = attrs.getColor(
-            R.styleable.RecyclerWheelView_wheelNormalTextColor,
+            R.styleable.SingleRecyclerWheelView_wheelNormalTextColor,
             resources.getColor(R.color.default_wheelNormalTextColor)
         )
         wheelItemInterval = attrs.getDimensionPixelSize(
-            R.styleable.RecyclerWheelView_wheelNormalTextSize,
+            R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
             dp2px(15f).toInt()
         )
         wheelNormalItemBackground = attrs.getDrawable(
-            R.styleable.RecyclerWheelView_wheelNormalItemBackground
+            R.styleable.SingleRecyclerWheelView_wheelNormalItemBackground
         )
         attrs.recycle()
-    }
-}
-
-class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-    private val typePadding = 0
-    private val typeItem = 1
-
-    private lateinit var itemList : List<IRecyclerWheelViewItem>
-
-    constructor(itemList : List<IRecyclerWheelViewItem>) {
-        this.itemList = itemList
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        if (position == 0 || position == itemList.size) {
-            return typePadding
-        }
-        return  typeItem
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }
