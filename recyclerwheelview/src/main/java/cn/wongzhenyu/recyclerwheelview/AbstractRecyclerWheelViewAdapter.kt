@@ -30,6 +30,9 @@ abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerV
         })
     }
 
+    /**
+     * the index of start and end are padding item's index, not included in valid item
+     */
     override fun getItemViewType(position: Int): Int {
         if (position == 0 || position == itemList.size) {
             return typePadding
@@ -38,15 +41,42 @@ abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerV
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (viewType == typePadding) {
+            TODO("return padding item")
+        }
+        return onCreateItemViewHolder(parent)
     }
 
+    /**
+     * create a Normal ViewHolder by your customized layout, you can change its property in onBindSelectedViewHolder and onBindNotSelectedViewHolder
+     */
+    abstract fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
+
     override fun getItemCount(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return itemList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        if (isSelectedItem(position)) {
+            onBindSelectedViewHolder(holder, position)
+        } else {
+            onBindNotSelectedViewHolder(holder, position)
+        }
     }
+
+    /**
+     * bind selected item's ViewHolder
+     */
+    abstract fun onBindSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+
+    /**
+     * bind not selected item's ViewHolder
+     */
+    abstract fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int)
+
+
+    private fun isSelectedItem(position: Int) : Boolean {
+        TODO("Judge if it is selected item")
+    }
+
 }
