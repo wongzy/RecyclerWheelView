@@ -75,7 +75,7 @@ abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerV
     abstract fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int)
 
 
-    private fun isSelectedItem(position: Int) : Boolean {
+    private fun isSelectedItem(position: Int): Boolean {
         TODO("Judge if it is selected item")
     }
 

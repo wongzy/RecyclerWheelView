@@ -9,5 +9,5 @@ interface IRecyclerWheelViewItem {
     /**
      * get display string to adapter
      */
-    fun getItemString() : String
+    fun getItemString(): String
 }

@@ -9,12 +9,12 @@ import android.content.res.Resources
  * Common utils in this project
  **/
 
-fun dp2px(dp : Float) : Float {
+fun dp2px(dp: Float): Float {
     val density = Resources.getSystem().displayMetrics.density
     return dp * density
 }
 
-fun sp2px(sp : Float) : Float {
+fun sp2px(sp: Float): Float {
     val scaleDensity = Resources.getSystem().displayMetrics.scaledDensity
     return sp * scaleDensity
 }

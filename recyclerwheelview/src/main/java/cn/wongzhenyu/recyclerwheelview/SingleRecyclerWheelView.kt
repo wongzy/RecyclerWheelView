@@ -37,7 +37,8 @@ class SingleRecyclerWheelView : RecyclerView {
     }
 
     private fun init(context: Context, attributeSet: AttributeSet?) {
-        val attrs = context.obtainStyledAttributes(attributeSet, R.styleable.SingleRecyclerWheelView)
+        val attrs =
+            context.obtainStyledAttributes(attributeSet, R.styleable.SingleRecyclerWheelView)
         wheelSelectedItemTextColor = attrs.getColor(
             R.styleable.SingleRecyclerWheelView_wheelSelectedItemTextColor,
             resources.getColor(R.color.default_wheelSelectedItemTextColor)
