@@ -30,7 +30,9 @@ abstract class RecyclerWheelView : RecyclerView {
     private fun init(context: Context, attributeSet: AttributeSet?) {
     }
 
-    @Deprecated("use setAdapter(adapter: RecyclerWheelViewAdapter<*>?) instead of setAdapter(adapter: Adapter<*>?)")
+    @Deprecated("use setAdapter(adapter: RecyclerWheelViewAdapter<*>?) instead of setAdapter(adapter: Adapter<*>?)",
+        ReplaceWith("setAdapter(recyclerWheelViewAdapter)", "cn.wongzhenyu.recyclerwheelview.setAdapter(recyclerWheelViewAdapter)")
+    )
     override fun setAdapter(adapter: Adapter<*>?) {
         if (adapter !is RecyclerWheelViewAdapter) {
             throw IllegalArgumentException("adapter is not a instance of RecyclerWheelViewAdapter")
@@ -38,7 +40,7 @@ abstract class RecyclerWheelView : RecyclerView {
         super.setAdapter(adapter)
     }
 
-    fun setAdapter(adapter: RecyclerWheelViewAdapter<*>?) {
-        setAdapter(adapter)
+    fun setAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter<*>?) {
+        setAdapter(recyclerWheelViewAdapter)
     }
 }
