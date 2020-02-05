@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
  * wongzhenyu96@gmail.com
  * 2020-02-03
  **/
-abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder> {
+abstract class RecyclerWheelViewAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH> {
 
     private val typePadding = 0
     private val typeItem = 1
@@ -40,7 +40,7 @@ abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerV
         return typeItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
         if (viewType == typePadding) {
             TODO("return padding item")
         }
@@ -50,13 +50,13 @@ abstract class AbstractRecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerV
     /**
      * create a Normal ViewHolder by your customized layout, you can change its property in onBindSelectedViewHolder and onBindNotSelectedViewHolder
      */
-    abstract fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
+    abstract fun onCreateItemViewHolder(parent: ViewGroup): VH
 
     override fun getItemCount(): Int {
         return itemList.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: VH, position: Int) {
         if (isSelectedItem(position)) {
             onBindSelectedViewHolder(holder, position)
         } else {
