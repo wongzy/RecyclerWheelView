@@ -3,6 +3,9 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.view.View
+import android.view.ViewTreeObserver
+import androidx.core.view.doOnPreDraw
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -66,5 +69,7 @@ class SingleRecyclerWheelView : RecyclerView {
             R.styleable.SingleRecyclerWheelView_wheelNormalItemBackground
         )
         attrs.recycle()
+        TODO("init layout attributes")
+
     }
 }
