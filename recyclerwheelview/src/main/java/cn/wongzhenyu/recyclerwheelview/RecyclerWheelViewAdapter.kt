@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
  * wongzhenyu96@gmail.com
  * 2020-02-03
  **/
+
+private const val typePadding = 0
+private const val typeItem = 1
+
 abstract class RecyclerWheelViewAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH> {
 
-    private val typePadding = 0
-    private val typeItem = 1
 
     private var itemList: MutableList<IRecyclerWheelViewItem>
 
