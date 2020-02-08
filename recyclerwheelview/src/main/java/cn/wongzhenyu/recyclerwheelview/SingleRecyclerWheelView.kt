@@ -69,7 +69,19 @@ class SingleRecyclerWheelView : RecyclerView {
             R.styleable.SingleRecyclerWheelView_wheelNormalItemBackground
         )
         attrs.recycle()
-        TODO("init layout attributes")
+    }
 
+
+    /**
+     * rewrite onPreDrawListener
+     */
+    private fun initPreDrawListener() {
+        viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener{
+            override fun onPreDraw(): Boolean {
+                viewTreeObserver.removeOnPreDrawListener(this)
+                //todo build a bridge between adapter and view, get attributes
+                return true
+            }
+        })
     }
 }
