@@ -50,7 +50,9 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     abstract fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
 
     final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-
+        if (position == 0 || position == itemCount - 1) {
+            return
+        }
         if (isSelectedItem(position)) {
             onBindSelectedViewHolder(holder, position)
         } else {
@@ -69,8 +71,17 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
      */
     abstract fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int)
 
+    /**
+     * get item size
+     */
+    abstract fun getWheelItemCount(): Int
+
+    final override fun getItemCount(): Int {
+        return getWheelItemCount() + 2
+    }
+
 
     private fun isSelectedItem(position: Int): Boolean {
-        TODO("Judge if it is selected item")
+        TODO("Judge is it a selected item")
     }
 }
