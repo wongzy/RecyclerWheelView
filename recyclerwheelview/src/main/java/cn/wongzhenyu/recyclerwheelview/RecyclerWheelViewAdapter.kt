@@ -1,5 +1,6 @@
 package cn.wongzhenyu.recyclerwheelview
 
+import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
@@ -12,59 +13,51 @@ import androidx.recyclerview.widget.RecyclerView
 private const val typePadding = 0
 private const val typeItem = 1
 
-abstract class RecyclerWheelViewAdapter<VH : RecyclerView.ViewHolder> : RecyclerView.Adapter<VH> {
+abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-
-    private var itemList: MutableList<IRecyclerWheelViewItem>
-
-    constructor(itemList: MutableList<IRecyclerWheelViewItem>) {
-        this.itemList = itemList
-        //need to put two empty element to list's head and end, it is aimed to create two padding item
-        this.itemList.add(0, object : IRecyclerWheelViewItem {
-            override fun getItemString(): String {
-                return ""
-            }
-        })
-        this.itemList.add(object : IRecyclerWheelViewItem {
-            override fun getItemString(): String {
-                return ""
-            }
-        })
-    }
 
     /**
      * the index of start and end are padding item's index, not included in valid item
      */
-    override fun getItemViewType(position: Int): Int {
-        if (position == 0 || position == itemList.size) {
+    final override fun getItemViewType(position: Int): Int {
+        if (position == 0 || position == itemCount) {
             return typePadding
         }
         return typeItem
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VH {
+    final override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): RecyclerView.ViewHolder {
         if (viewType == typePadding) {
-            TODO("return padding item")
+            return onCreatePaddingItemViewHolder(parent)
         }
         return onCreateItemViewHolder(parent)
+    }
+
+
+    private fun onCreatePaddingItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        val view = LayoutInflater.from(parent.context)
+            .inflate(R.layout.view_padding_recycler_wheel_view, parent, false)
+        return object : RecyclerView.ViewHolder(view) {
+        }
     }
 
     /**
      * create a Normal ViewHolder by your customized layout, you can change its property in onBindSelectedViewHolder and onBindNotSelectedViewHolder
      */
-    abstract fun onCreateItemViewHolder(parent: ViewGroup): VH
+    abstract fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
 
-    override fun getItemCount(): Int {
-        return itemList.size
-    }
+    final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
 
-    override fun onBindViewHolder(holder: VH, position: Int) {
         if (isSelectedItem(position)) {
             onBindSelectedViewHolder(holder, position)
         } else {
             onBindNotSelectedViewHolder(holder, position)
         }
     }
+
 
     /**
      * bind selected item's ViewHolder
@@ -80,5 +73,4 @@ abstract class RecyclerWheelViewAdapter<VH : RecyclerView.ViewHolder> : Recycler
     private fun isSelectedItem(position: Int): Boolean {
         TODO("Judge if it is selected item")
     }
-
 }
