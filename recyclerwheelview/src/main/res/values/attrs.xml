@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <declare-styleable name="RecyclerWheelView">
+    <declare-styleable name="SingleRecyclerWheelView">
         <attr name="wheelSelectedItemTextColor" format="color|reference" />
         <attr name="wheelSelectedTextSize" format="dimension|reference" />
         <attr name="wheelSelectedItemBackground" format="reference"/>
