@@ -1,7 +1,6 @@
 package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 
 /**
@@ -11,13 +10,7 @@ import android.util.AttributeSet
  **/
 class SingleRecyclerWheelView : RecyclerWheelView {
 
-    private var wheelSelectedItemTextColor = -1
-    private var wheelSelectedItemTextSize = -1
-    private var wheelSelectedItemBackground: Drawable? = null
-    private var wheelNormalTextSize = -1
-    private var wheelNormalTextColor = -1
-    private var wheelItemInterval = -1
-    private var wheelNormalItemBackground: Drawable? = null
+    private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -37,31 +30,40 @@ class SingleRecyclerWheelView : RecyclerWheelView {
     private fun init(context: Context, attributeSet: AttributeSet?) {
         val attrs =
             context.obtainStyledAttributes(attributeSet, R.styleable.SingleRecyclerWheelView)
-        wheelSelectedItemTextColor = attrs.getColor(
+        val wheelSelectedItemTextColor = attrs.getColor(
             R.styleable.SingleRecyclerWheelView_wheelSelectedItemTextColor,
             resources.getColor(R.color.default_wheelSelectedItemTextColor)
         )
-        wheelSelectedItemTextSize = attrs.getDimensionPixelSize(
+        val wheelSelectedItemTextSize = attrs.getDimensionPixelSize(
             R.styleable.SingleRecyclerWheelView_wheelSelectedTextSize,
             sp2px(15.5f).toInt()
         )
-        wheelSelectedItemBackground = attrs.getDrawable(
+        val wheelSelectedItemBackground = attrs.getDrawable(
             R.styleable.SingleRecyclerWheelView_wheelSelectedItemBackground
         )
-        wheelNormalTextSize = attrs.getDimensionPixelSize(
+        val wheelNormalTextSize = attrs.getDimensionPixelSize(
             R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
             sp2px(13.5f).toInt()
         )
-        wheelNormalTextColor = attrs.getColor(
+        val wheelNormalTextColor = attrs.getColor(
             R.styleable.SingleRecyclerWheelView_wheelNormalTextColor,
             resources.getColor(R.color.default_wheelNormalTextColor)
         )
-        wheelItemInterval = attrs.getDimensionPixelSize(
+        val wheelItemInterval = attrs.getDimensionPixelSize(
             R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
             dp2px(15f).toInt()
         )
-        wheelNormalItemBackground = attrs.getDrawable(
+        val wheelNormalItemBackground = attrs.getDrawable(
             R.styleable.SingleRecyclerWheelView_wheelNormalItemBackground
+        )
+        recyclerWheelViewItemInfo = RecyclerWheelViewItemInfo(
+            wheelSelectedItemTextColor,
+            wheelSelectedItemTextSize,
+            wheelSelectedItemBackground,
+            wheelNormalTextSize,
+            wheelNormalTextColor,
+            wheelItemInterval,
+            wheelNormalItemBackground
         )
         attrs.recycle()
     }
