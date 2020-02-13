@@ -8,7 +8,9 @@ import android.graphics.drawable.Drawable
  * 2020-02-12
  * attributes class
  **/
-internal data class RecyclerWheelViewItemInfo(val wheelSelectedItemTextColor: Int, val wheelSelectedItemTextSize : Int,
-                                     val wheelSelectedItemBackground : Drawable?, val wheelNormalTextSize : Int,
-                                     val wheelNormalTextColor : Int, val wheelItemInterval : Int,
-                                     val wheelNormalItemBackground: Drawable?)
+internal data class RecyclerWheelViewItemInfo(
+    val wheelSelectedItemTextColor: Int, val wheelSelectedItemTextSize: Int,
+    val wheelSelectedItemBackground: Drawable?, val wheelNormalTextSize: Int,
+    val wheelNormalTextColor: Int, val wheelItemInterval: Int,
+    val wheelNormalItemBackground: Drawable?
+)

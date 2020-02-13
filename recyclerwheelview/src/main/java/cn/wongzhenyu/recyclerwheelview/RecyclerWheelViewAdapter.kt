@@ -15,15 +15,7 @@ private const val typeItem = 1
 
 abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
-
-    /**
-     * set attributes info data
-     */
-    internal fun setRecyclerWheelViewItemInfo(recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo) {
-        this.recyclerWheelViewItemInfo = recyclerWheelViewItemInfo
-    }
-
+    internal var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo? = null
 
     /**
      * the index of start and end are padding item's index, not included in valid item
