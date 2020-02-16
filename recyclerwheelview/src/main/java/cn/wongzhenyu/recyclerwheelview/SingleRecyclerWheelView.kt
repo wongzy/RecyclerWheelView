@@ -11,6 +11,7 @@ import android.util.AttributeSet
 class SingleRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
+    private lateinit var stringItemList : List<String>
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -66,6 +67,11 @@ class SingleRecyclerWheelView : RecyclerWheelView {
             wheelNormalItemBackground
         )
         attrs.recycle()
+    }
+
+
+    fun setStringItemList(stringList : List<String>) {
+        this.stringItemList = stringList
     }
 
 }

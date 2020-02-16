@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-        package="cn.wongzhenyu.recyclerwheelview" />
+<manifest package="cn.wongzhenyu.recyclerwheelview" />
