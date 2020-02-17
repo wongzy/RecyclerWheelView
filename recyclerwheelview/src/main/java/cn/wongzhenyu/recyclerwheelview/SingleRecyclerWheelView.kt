@@ -2,6 +2,9 @@ package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.ViewTreeObserver
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 
 /**
  * github wongzy
@@ -12,6 +15,7 @@ class SingleRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private lateinit var stringItemList : List<String>
+    private lateinit var singleRecyclerWheelViewAdapter : RecyclerWheelViewAdapter
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -72,6 +76,23 @@ class SingleRecyclerWheelView : RecyclerWheelView {
 
     fun setStringItemList(stringList : List<String>) {
         this.stringItemList = stringList
+        initPreDrawListener()
+    }
+
+    /**
+     * rewrite onPreDrawListener
+     */
+    private fun initPreDrawListener() {
+        viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
+            override fun onPreDraw(): Boolean {
+                viewTreeObserver.removeOnPreDrawListener(this)
+                //todo build adapter and add scroll listener
+                layoutManager = LinearLayoutManager(context)
+                val snapHelper = LinearSnapHelper()
+                snapHelper.attachToRecyclerView(this@SingleRecyclerWheelView)
+                return true
+            }
+        })
     }
 
 }

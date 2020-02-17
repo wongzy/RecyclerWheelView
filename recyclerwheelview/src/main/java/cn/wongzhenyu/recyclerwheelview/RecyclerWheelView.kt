@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 /**
@@ -55,9 +56,10 @@ abstract class RecyclerWheelView : RecyclerView {
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 viewTreeObserver.removeOnPreDrawListener(this)
-                //todo build a bridge between adapter and view, get attributes
                 setAdapter(recyclerWheelViewAdapter)
                 layoutManager = LinearLayoutManager(context)
+                val snapHelper = LinearSnapHelper()
+                snapHelper.attachToRecyclerView(this@RecyclerWheelView)
                 return true
             }
         })
