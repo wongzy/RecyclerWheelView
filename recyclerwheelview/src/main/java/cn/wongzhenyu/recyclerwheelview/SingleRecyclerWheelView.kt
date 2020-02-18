@@ -5,6 +5,7 @@ import android.util.AttributeSet
 import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * github wongzy
@@ -90,6 +91,15 @@ class SingleRecyclerWheelView : RecyclerWheelView {
                 layoutManager = LinearLayoutManager(context)
                 val snapHelper = LinearSnapHelper()
                 snapHelper.attachToRecyclerView(this@SingleRecyclerWheelView)
+                addOnScrollListener(object : OnScrollListener(){
+                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        super.onScrolled(recyclerView, dx, dy)
+                    }
+
+                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                        super.onScrollStateChanged(recyclerView, newState)
+                    }
+                })
                 return true
             }
         })
