@@ -15,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 abstract class RecyclerWheelView : RecyclerView {
 
+    protected var pointY = 0
+
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)
 
     constructor(context: Context) : super(context)
@@ -63,6 +65,13 @@ abstract class RecyclerWheelView : RecyclerView {
                 return true
             }
         })
+    }
+
+    /**
+     * update selected item position
+     */
+    protected fun notifyData() {
+
     }
 
 
