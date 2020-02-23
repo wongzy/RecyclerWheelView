@@ -16,14 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 class StringRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
-    private val stringItemList : MutableList<String> = ArrayList()
+    private val stringItemList: MutableList<String> = ArrayList()
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
         init(context, attributeSet)
     }
-
-    constructor(context: Context) : super(context)
 
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(
         context,
@@ -75,7 +73,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
     }
 
 
-    fun setStringItemList(stringList : MutableList<String>) {
+    fun setStringItemList(stringList: MutableList<String>) {
         this.stringItemList.addAll(stringList)
         initPreDrawListener()
     }
@@ -84,18 +82,17 @@ class StringRecyclerWheelView : RecyclerWheelView {
      * rewrite onPreDrawListener
      */
     private fun initPreDrawListener() {
-        val layoutManager= LinearLayoutManager(context)
-        layoutManager.orientation = VERTICAL
-        setLayoutManager(layoutManager)
+        layoutManager = LinearLayoutManager(context, VERTICAL, false)
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
-        val singleRecyclerWheelViewAdapter = StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
+        val singleRecyclerWheelViewAdapter =
+            StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 Log.e("StringRecyclerWheelView", "onPreDraw")
                 viewTreeObserver.removeOnPreDrawListener(this)
-                addOnScrollListener(object : OnScrollListener(){
+                addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
                         pointY += dy

@@ -2,9 +2,6 @@ package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.ViewTreeObserver
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 
 /**
