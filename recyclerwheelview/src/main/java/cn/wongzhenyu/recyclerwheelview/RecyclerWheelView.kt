@@ -41,7 +41,7 @@ abstract class RecyclerWheelView : RecyclerView {
      * set adapter
      */
     fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
-        initPreDrawListener(recyclerWheelViewAdapter)
+        adapter = recyclerWheelViewAdapter
     }
 
     @Deprecated(
@@ -49,29 +49,6 @@ abstract class RecyclerWheelView : RecyclerView {
     )
     override fun setLayoutManager(layout: LayoutManager?) {
         super.setLayoutManager(layout)
-    }
-
-    /**
-     * rewrite onPreDrawListener
-     */
-    private fun initPreDrawListener(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
-        viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                viewTreeObserver.removeOnPreDrawListener(this)
-                setAdapter(recyclerWheelViewAdapter)
-                layoutManager = LinearLayoutManager(context)
-                val snapHelper = LinearSnapHelper()
-                snapHelper.attachToRecyclerView(this@RecyclerWheelView)
-                return true
-            }
-        })
-    }
-
-    /**
-     * update selected item position
-     */
-    protected fun notifyData() {
-
     }
 
 

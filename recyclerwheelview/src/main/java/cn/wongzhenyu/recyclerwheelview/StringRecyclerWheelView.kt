@@ -2,6 +2,7 @@ package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -12,11 +13,10 @@ import androidx.recyclerview.widget.RecyclerView
  * wongzhenyu96@gmail.com
  * 2019-12-29
  **/
-class SingleRecyclerWheelView : RecyclerWheelView {
+class StringRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
-    private lateinit var stringItemList : List<String>
-    private lateinit var singleRecyclerWheelViewAdapter : RecyclerWheelViewAdapter
+    private val stringItemList : MutableList<String> = ArrayList()
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -35,32 +35,32 @@ class SingleRecyclerWheelView : RecyclerWheelView {
 
     private fun init(context: Context, attributeSet: AttributeSet?) {
         val attrs =
-            context.obtainStyledAttributes(attributeSet, R.styleable.SingleRecyclerWheelView)
+            context.obtainStyledAttributes(attributeSet, R.styleable.StringRecyclerWheelView)
         val wheelSelectedItemTextColor = attrs.getColor(
-            R.styleable.SingleRecyclerWheelView_wheelSelectedItemTextColor,
+            R.styleable.StringRecyclerWheelView_wheelSelectedItemTextColor,
             resources.getColor(R.color.default_wheelSelectedItemTextColor)
         )
         val wheelSelectedItemTextSize = attrs.getDimensionPixelSize(
-            R.styleable.SingleRecyclerWheelView_wheelSelectedTextSize,
+            R.styleable.StringRecyclerWheelView_wheelSelectedTextSize,
             sp2px(15.5f).toInt()
         )
         val wheelSelectedItemBackground = attrs.getDrawable(
-            R.styleable.SingleRecyclerWheelView_wheelSelectedItemBackground
+            R.styleable.StringRecyclerWheelView_wheelSelectedItemBackground
         )
         val wheelNormalTextSize = attrs.getDimensionPixelSize(
-            R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
+            R.styleable.StringRecyclerWheelView_wheelNormalTextSize,
             sp2px(13.5f).toInt()
         )
         val wheelNormalTextColor = attrs.getColor(
-            R.styleable.SingleRecyclerWheelView_wheelNormalTextColor,
+            R.styleable.StringRecyclerWheelView_wheelNormalTextColor,
             resources.getColor(R.color.default_wheelNormalTextColor)
         )
         val wheelItemInterval = attrs.getDimensionPixelSize(
-            R.styleable.SingleRecyclerWheelView_wheelNormalTextSize,
+            R.styleable.StringRecyclerWheelView_wheelNormalTextSize,
             dp2px(15f).toInt()
         )
         val wheelNormalItemBackground = attrs.getDrawable(
-            R.styleable.SingleRecyclerWheelView_wheelNormalItemBackground
+            R.styleable.StringRecyclerWheelView_wheelNormalItemBackground
         )
         recyclerWheelViewItemInfo = RecyclerWheelViewItemInfo(
             wheelSelectedItemTextColor,
@@ -75,8 +75,8 @@ class SingleRecyclerWheelView : RecyclerWheelView {
     }
 
 
-    fun setStringItemList(stringList : List<String>) {
-        this.stringItemList = stringList
+    fun setStringItemList(stringList : MutableList<String>) {
+        this.stringItemList.addAll(stringList)
         initPreDrawListener()
     }
 
@@ -84,21 +84,22 @@ class SingleRecyclerWheelView : RecyclerWheelView {
      * rewrite onPreDrawListener
      */
     private fun initPreDrawListener() {
+        val layoutManager= LinearLayoutManager(context)
+        layoutManager.orientation = VERTICAL
+        setLayoutManager(layoutManager)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
+        val singleRecyclerWheelViewAdapter = StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
+        setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
+                Log.e("StringRecyclerWheelView", "onPreDraw")
                 viewTreeObserver.removeOnPreDrawListener(this)
-                //todo build adapter and add scroll listener
-                layoutManager = LinearLayoutManager(context)
-                val snapHelper = LinearSnapHelper()
-                snapHelper.attachToRecyclerView(this@SingleRecyclerWheelView)
                 addOnScrollListener(object : OnScrollListener(){
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         super.onScrolled(recyclerView, dx, dy)
                         pointY += dy
-                    }
-
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        super.onScrollStateChanged(recyclerView, newState)
+                        singleRecyclerWheelViewAdapter.notifyScroll(pointY)
                     }
                 })
                 return true

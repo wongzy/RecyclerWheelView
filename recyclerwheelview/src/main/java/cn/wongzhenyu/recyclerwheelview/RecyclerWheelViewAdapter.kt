@@ -15,7 +15,7 @@ private const val typeItem = 1
 
 abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    internal var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo? = null
+    protected var selectedItem = 1
 
     /**
      * the index of start and end are padding item's index, not included in valid item
@@ -41,6 +41,10 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     private fun onCreatePaddingItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_padding_recycler_wheel_view, parent, false)
+        val height = parent.measuredHeight / 2
+        val layoutParams = view.layoutParams
+        layoutParams.height = height
+        view.layoutParams = layoutParams
         return object : RecyclerView.ViewHolder(view) {
         }
     }
@@ -55,9 +59,9 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
             return
         }
         if (isSelectedItem(position)) {
-            onBindSelectedViewHolder(holder, position)
+            onBindSelectedViewHolder(holder, position - 1)
         } else {
-            onBindNotSelectedViewHolder(holder, position)
+            onBindNotSelectedViewHolder(holder, position - 1)
         }
     }
 
@@ -83,6 +87,6 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
 
 
     private fun isSelectedItem(position: Int): Boolean {
-        TODO("Judge is it a selected item")
+        return position == selectedItem
     }
 }
