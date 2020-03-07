@@ -5,6 +5,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logInfo
+import cn.wongzhenyu.recyclerwheelview.util.logWarn
 
 /**
  * github wongzy
@@ -26,6 +29,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     }
 
     override fun onBindSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        logInfo("onBindSelectedViewHolder position = $position")
         val itemViewHolderSelected = holder as ItemViewHolder
         itemViewHolderSelected.contentView.text = stringList[position]
         itemViewHolderSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelSelectedItemTextColor)
@@ -38,6 +42,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     }
 
     override fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        logInfo("onBindNotSelectedViewHolder position = $position")
         val itemViewHolderUnSelected = holder as ItemViewHolder
         itemViewHolderUnSelected.contentView.text = stringList[position]
         itemViewHolderUnSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelNormalTextColor)
@@ -50,10 +55,12 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     }
 
     override fun getWheelItemCount(): Int {
+        logInfo("getWheelItemCount = ${stringList.size}")
         return stringList.size
     }
 
     override fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        logDebug("onCreateItemViewHolder")
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_nor_recycler_wheel_view, parent, false)
         return ItemViewHolder(rootView)
@@ -67,9 +74,11 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
      * calculate selected item and notify
      */
     fun notifyScroll(scrolledY: Int) {
+        logInfo("notifyScroll scrolledY = $scrolledY")
         val newSelectedItem =
             scrolledY / (recyclerWheelViewItemInfo.wheelNormalTextSize + recyclerWheelViewItemInfo.wheelItemInterval) + 1
         val oldSelectedItem = selectedItem
+        logInfo("oldSelectedItem = $oldSelectedItem, newSelectedItem = $newSelectedItem")
         if (newSelectedItem != oldSelectedItem) {
             selectedItem = newSelectedItem
             notifyItemChanged(oldSelectedItem)

@@ -3,6 +3,9 @@ package cn.wongzhenyu.recyclerwheelview
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logError
+import cn.wongzhenyu.recyclerwheelview.util.logInfo
 
 /**
  * github wongzy
@@ -21,6 +24,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
      * the index of start and end are padding item's index, not included in valid item
      */
     final override fun getItemViewType(position: Int): Int {
+        logInfo("getItemViewType position = $position")
         if (position == 0 || position == itemCount) {
             return typePadding
         }
@@ -31,6 +35,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
         parent: ViewGroup,
         viewType: Int
     ): RecyclerView.ViewHolder {
+        logInfo("onCreateViewHolder viewType = $viewType")
         if (viewType == typePadding) {
             return onCreatePaddingItemViewHolder(parent)
         }
@@ -39,6 +44,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
 
 
     private fun onCreatePaddingItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
+        logDebug("onCreatePaddingItemViewHolder")
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_padding_recycler_wheel_view, parent, false)
         val height = parent.measuredHeight / 2
@@ -55,7 +61,9 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     abstract fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder
 
     final override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        logInfo("onBindViewHolder position = $position")
         if (position == 0 || position == itemCount - 1) {
+            logError("onBindViewHolder -- not need bind")
             return
         }
         if (isSelectedItem(position)) {
@@ -82,11 +90,13 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     abstract fun getWheelItemCount(): Int
 
     final override fun getItemCount(): Int {
+        logDebug("getItemCount")
         return getWheelItemCount() + 2
     }
 
 
     private fun isSelectedItem(position: Int): Boolean {
+        logInfo("isSelectedItem position = $position selectedItem = $selectedItem")
         return position == selectedItem
     }
 }

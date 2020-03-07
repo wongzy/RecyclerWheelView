@@ -7,6 +7,13 @@ import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
+import cn.wongzhenyu.recyclerwheelview.util.*
+import cn.wongzhenyu.recyclerwheelview.util.dp2px
+import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logInfo
+import cn.wongzhenyu.recyclerwheelview.util.logWarn
+import cn.wongzhenyu.recyclerwheelview.util.sp2px
+import javax.security.auth.login.LoginException
 
 /**
  * github wongzy
@@ -70,10 +77,12 @@ class StringRecyclerWheelView : RecyclerWheelView {
             wheelNormalItemBackground
         )
         attrs.recycle()
+        logInfo("init recyclerWheelViewItemInfo = $recyclerWheelViewItemInfo")
     }
 
 
     fun setStringItemList(stringList: MutableList<String>) {
+        logInfo("setStringItemList size = ${stringList.size}")
         this.stringItemList.addAll(stringList)
         initPreDrawListener()
     }
@@ -82,6 +91,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
      * rewrite onPreDrawListener
      */
     private fun initPreDrawListener() {
+        logInfo("initPreDrawListener")
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
@@ -90,10 +100,11 @@ class StringRecyclerWheelView : RecyclerWheelView {
         setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
-                Log.e("StringRecyclerWheelView", "onPreDraw")
+                logWarn("preDrawListener onPreDraw")
                 viewTreeObserver.removeOnPreDrawListener(this)
                 addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                        logDebug("scrollListener onScrolled")
                         super.onScrolled(recyclerView, dx, dy)
                         pointY += dy
                         singleRecyclerWheelViewAdapter.notifyScroll(pointY)

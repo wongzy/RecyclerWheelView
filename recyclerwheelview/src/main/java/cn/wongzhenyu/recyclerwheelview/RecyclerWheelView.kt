@@ -3,6 +3,9 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.RecyclerView
+import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logError
+import cn.wongzhenyu.recyclerwheelview.util.logInfo
 
 /**
  * github wongzy
@@ -28,7 +31,9 @@ abstract class RecyclerWheelView : RecyclerView {
         "setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter<*>?) instead of setAdapter(adapter: Adapter<*>?)"
     )
     override fun setAdapter(adapter: Adapter<ViewHolder>?) {
+        logDebug("setAdapter")
         if (adapter !is RecyclerWheelViewAdapter) {
+            logError("adapter is not a instance of RecyclerWheelViewAdapter")
             throw IllegalArgumentException("adapter is not a instance of RecyclerWheelViewAdapter")
         }
         super.setAdapter(adapter)
@@ -38,6 +43,7 @@ abstract class RecyclerWheelView : RecyclerView {
      * set adapter
      */
     fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
+        logDebug("setRecyclerWheelViewAdapter")
         adapter = recyclerWheelViewAdapter
     }
 
@@ -45,6 +51,7 @@ abstract class RecyclerWheelView : RecyclerView {
         "You should not setLayoutManager by yourself"
     )
     override fun setLayoutManager(layout: LayoutManager?) {
+        logDebug("setLayoutManager")
         super.setLayoutManager(layout)
     }
 
