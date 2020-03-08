@@ -83,6 +83,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
 
     fun setStringItemList(stringList: MutableList<String>) {
         logInfo("setStringItemList size = ${stringList.size}")
+        this.stringItemList.clear()
         this.stringItemList.addAll(stringList)
         initPreDrawListener()
     }
@@ -92,16 +93,13 @@ class StringRecyclerWheelView : RecyclerWheelView {
      */
     private fun initPreDrawListener() {
         logInfo("initPreDrawListener")
-        layoutManager = LinearLayoutManager(context, VERTICAL, false)
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
-        val singleRecyclerWheelViewAdapter =
-            StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
-        setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
+
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 logWarn("preDrawListener onPreDraw")
                 viewTreeObserver.removeOnPreDrawListener(this)
+                val singleRecyclerWheelViewAdapter =
+                    StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
                 addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         logDebug("scrollListener onScrolled")
@@ -110,6 +108,10 @@ class StringRecyclerWheelView : RecyclerWheelView {
                         singleRecyclerWheelViewAdapter.notifyScroll(pointY)
                     }
                 })
+                layoutManager = LinearLayoutManager(context, VERTICAL, false)
+                val snapHelper = LinearSnapHelper()
+                snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
+                setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
                 return true
             }
         })

@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
-import cn.wongzhenyu.recyclerwheelview.util.logWarn
 
 /**
  * github wongzy

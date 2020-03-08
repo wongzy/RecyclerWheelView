@@ -18,6 +18,7 @@ class StringWheelViewTest : AppCompatActivity() {
     private val tag = "StringWheelViewTest"
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        Log.d(tag, "onCreate")
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_string)
         stringRecyclerWheelView = string_wheel_view as StringRecyclerWheelView

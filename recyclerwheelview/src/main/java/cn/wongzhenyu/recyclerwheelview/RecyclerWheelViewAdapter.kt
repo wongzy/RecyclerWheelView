@@ -25,7 +25,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
      */
     final override fun getItemViewType(position: Int): Int {
         logInfo("getItemViewType position = $position")
-        if (position == 0 || position == itemCount) {
+        if (position == 0 || position == itemCount - 1) {
             return typePadding
         }
         return typeItem
