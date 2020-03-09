@@ -61,8 +61,8 @@ class StringRecyclerWheelView : RecyclerWheelView {
             resources.getColor(R.color.default_wheelNormalTextColor)
         )
         val wheelItemInterval = attrs.getDimensionPixelSize(
-            R.styleable.StringRecyclerWheelView_wheelNormalTextSize,
-            dp2px(15f).toInt()
+            R.styleable.StringRecyclerWheelView_wheelItemInterval,
+            dp2px(65f).toInt()
         )
         val wheelNormalItemBackground = attrs.getDrawable(
             R.styleable.StringRecyclerWheelView_wheelNormalItemBackground
@@ -93,13 +93,16 @@ class StringRecyclerWheelView : RecyclerWheelView {
      */
     private fun initPreDrawListener() {
         logInfo("initPreDrawListener")
-
+        val singleRecyclerWheelViewAdapter =
+            StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
+        layoutManager = LinearLayoutManager(context, VERTICAL, false)
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
+        setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
         viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
             override fun onPreDraw(): Boolean {
                 logWarn("preDrawListener onPreDraw")
                 viewTreeObserver.removeOnPreDrawListener(this)
-                val singleRecyclerWheelViewAdapter =
-                    StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
                 addOnScrollListener(object : OnScrollListener() {
                     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                         logDebug("scrollListener onScrolled")
@@ -108,10 +111,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
                         singleRecyclerWheelViewAdapter.notifyScroll(pointY)
                     }
                 })
-                layoutManager = LinearLayoutManager(context, VERTICAL, false)
-                val snapHelper = LinearSnapHelper()
-                snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
-                setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
                 return true
             }
         })

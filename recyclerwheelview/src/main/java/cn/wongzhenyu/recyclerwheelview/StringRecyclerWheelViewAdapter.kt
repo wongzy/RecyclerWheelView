@@ -34,10 +34,6 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelSelectedItemTextColor)
         itemViewHolderSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelSelectedItemTextSize.toFloat()
-        val layoutParams = itemViewHolderSelected.itemView.layoutParams
-        layoutParams.height =
-            itemViewHolderSelected.contentView.height + recyclerWheelViewItemInfo.wheelItemInterval
-        itemViewHolderSelected.itemView.layoutParams = layoutParams
     }
 
     override fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -47,10 +43,6 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderUnSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelNormalTextColor)
         itemViewHolderUnSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelSelectedItemTextSize.toFloat()
-        val layoutParams = itemViewHolderUnSelected.itemView.layoutParams
-        layoutParams.height =
-            itemViewHolderUnSelected.contentView.height + recyclerWheelViewItemInfo.wheelItemInterval
-        itemViewHolderUnSelected.itemView.layoutParams = layoutParams
     }
 
     override fun getWheelItemCount(): Int {
@@ -62,6 +54,9 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         logDebug("onCreateItemViewHolder")
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_nor_recycler_wheel_view, parent, false)
+        val layoutParams = rootView.layoutParams;
+        layoutParams.height = recyclerWheelViewItemInfo.wheelSelectedItemTextSize + recyclerWheelViewItemInfo.wheelItemInterval
+        rootView.layoutParams = layoutParams
         return ItemViewHolder(rootView)
     }
 
