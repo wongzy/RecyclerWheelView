@@ -2,18 +2,13 @@ package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
 import android.util.AttributeSet
-import android.util.Log
-import android.view.ViewTreeObserver
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import cn.wongzhenyu.recyclerwheelview.util.*
 import cn.wongzhenyu.recyclerwheelview.util.dp2px
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
-import cn.wongzhenyu.recyclerwheelview.util.logWarn
 import cn.wongzhenyu.recyclerwheelview.util.sp2px
-import javax.security.auth.login.LoginException
 
 /**
  * github wongzy
@@ -85,33 +80,26 @@ class StringRecyclerWheelView : RecyclerWheelView {
         logInfo("setStringItemList size = ${stringList.size}")
         this.stringItemList.clear()
         this.stringItemList.addAll(stringList)
-        initPreDrawListener()
+        initAdapterAndScrollener()
     }
 
     /**
-     * rewrite onPreDrawListener
+     * init attributes and set adapter
      */
-    private fun initPreDrawListener() {
-        logInfo("initPreDrawListener")
+    private fun initAdapterAndScrollener() {
+        logInfo("initAdapterAndScrollener")
         val singleRecyclerWheelViewAdapter =
             StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
         setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
-        viewTreeObserver.addOnPreDrawListener(object : ViewTreeObserver.OnPreDrawListener {
-            override fun onPreDraw(): Boolean {
-                logWarn("preDrawListener onPreDraw")
-                viewTreeObserver.removeOnPreDrawListener(this)
-                addOnScrollListener(object : OnScrollListener() {
-                    override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                        logDebug("scrollListener onScrolled")
-                        super.onScrolled(recyclerView, dx, dy)
-                        pointY += dy
-                        singleRecyclerWheelViewAdapter.notifyScroll(pointY)
-                    }
-                })
-                return true
+        addOnScrollListener(object : OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                logDebug("scrollListener onScrolled")
+                super.onScrolled(recyclerView, dx, dy)
+                pointY += dy
+                singleRecyclerWheelViewAdapter.notifyScroll(pointY)
             }
         })
     }
