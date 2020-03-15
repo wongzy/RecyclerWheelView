@@ -55,7 +55,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_nor_recycler_wheel_view, parent, false)
         val layoutParams = rootView.layoutParams;
-        layoutParams.height = recyclerWheelViewItemInfo.wheelSelectedItemTextSize + recyclerWheelViewItemInfo.wheelItemInterval
+        layoutParams.height = recyclerWheelViewItemInfo.wheelItemHeight
         rootView.layoutParams = layoutParams
         return ItemViewHolder(rootView)
     }
@@ -67,16 +67,22 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     /**
      * calculate selected item and notify
      */
-    fun notifyScroll(scrolledY: Int) {
+    fun notifyScroll(scrolledY: Int, selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
         logInfo("notifyScroll scrolledY = $scrolledY")
         val newSelectedItem =
-            scrolledY / (recyclerWheelViewItemInfo.wheelNormalTextSize + recyclerWheelViewItemInfo.wheelItemInterval) + 1
+            scrolledY / recyclerWheelViewItemInfo.wheelItemHeight + 1
         val oldSelectedItem = selectedItem
         logInfo("oldSelectedItem = $oldSelectedItem, newSelectedItem = $newSelectedItem")
         if (newSelectedItem != oldSelectedItem) {
             selectedItem = newSelectedItem
             notifyItemChanged(oldSelectedItem)
-            notifyItemChanged(selectedItem)
+            notifyItemChanged(newSelectedItem)
+        }
+        val selectedStringPosition = newSelectedItem - 1
+        if (selectedStringPosition in 0 until  stringList.size) {
+            selectedStringCallback?.onSelectedString(stringList[newSelectedItem - 1])
         }
     }
+
+
 }

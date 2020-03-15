@@ -19,6 +19,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
+    private var onSelectedStringCallback : OnSelectedStringCallback? = null
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -55,8 +56,8 @@ class StringRecyclerWheelView : RecyclerWheelView {
             R.styleable.StringRecyclerWheelView_wheelNormalTextColor,
             resources.getColor(R.color.default_wheelNormalTextColor)
         )
-        val wheelItemInterval = attrs.getDimensionPixelSize(
-            R.styleable.StringRecyclerWheelView_wheelItemInterval,
+        val wheelItemHeight = attrs.getDimensionPixelSize(
+            R.styleable.StringRecyclerWheelView_wheelItemHeight,
             dp2px(65f).toInt()
         )
         val wheelNormalItemBackground = attrs.getDrawable(
@@ -68,11 +69,20 @@ class StringRecyclerWheelView : RecyclerWheelView {
             wheelSelectedItemBackground,
             wheelNormalTextSize,
             wheelNormalTextColor,
-            wheelItemInterval,
+            wheelItemHeight,
             wheelNormalItemBackground
         )
         attrs.recycle()
+        //remove change item animator
+        itemAnimator = null
         logInfo("init recyclerWheelViewItemInfo = $recyclerWheelViewItemInfo")
+    }
+
+    /**
+     * set OnSelectedStringCallback to get selected String
+     */
+    fun setOnSelectedStringCallback(onSelectedStringCallback: OnSelectedStringCallback) {
+        this.onSelectedStringCallback = onSelectedStringCallback
     }
 
 
@@ -94,14 +104,25 @@ class StringRecyclerWheelView : RecyclerWheelView {
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
         setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
+        //invoke onSelectedStringCallback first before add ScrollListener
+        singleRecyclerWheelViewAdapter.notifyScroll(0, onSelectedStringCallback)
         addOnScrollListener(object : OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 logDebug("scrollListener onScrolled")
                 super.onScrolled(recyclerView, dx, dy)
                 pointY += dy
-                singleRecyclerWheelViewAdapter.notifyScroll(pointY)
+                singleRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
             }
         })
     }
 
+    /**
+     * selected string callback
+     */
+    interface OnSelectedStringCallback {
+        /**
+         * get selected string
+         */
+        fun onSelectedString(selectedString : String)
+    }
 }

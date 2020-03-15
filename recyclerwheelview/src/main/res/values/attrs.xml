@@ -7,6 +7,6 @@
         <attr name="wheelNormalTextSize" format="dimension|reference" />
         <attr name="wheelNormalTextColor" format="color|reference" />
         <attr name="wheelNormalItemBackground" format="reference" />
-        <attr name="wheelItemInterval" format="dimension|reference" />
+        <attr name="wheelItemHeight" format="dimension|reference" />
     </declare-styleable>
 </resources>
