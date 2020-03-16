@@ -42,7 +42,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderUnSelected.contentView.text = stringList[position]
         itemViewHolderUnSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelNormalTextColor)
         itemViewHolderUnSelected.contentView.textSize =
-            recyclerWheelViewItemInfo.wheelSelectedItemTextSize.toFloat()
+            recyclerWheelViewItemInfo.wheelNormalTextSize.toFloat()
     }
 
     override fun getWheelItemCount(): Int {

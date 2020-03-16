@@ -14,5 +14,9 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(applicationContext, StringWheelViewTest::class.java)
             startActivity(intent)
         }
+        custom_wheel_view.setOnClickListener {
+            val intent = Intent(this, CustomWheelViewTest::class.java)
+            startActivity(intent)
+        }
     }
 }
