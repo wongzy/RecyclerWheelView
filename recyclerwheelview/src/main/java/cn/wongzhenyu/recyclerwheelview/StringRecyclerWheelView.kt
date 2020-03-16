@@ -87,6 +87,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
 
 
     fun setStringItemList(stringList: MutableList<String>) {
+        //todo update strings when string list existed
         logInfo("setStringItemList size = ${stringList.size}")
         this.stringItemList.clear()
         this.stringItemList.addAll(stringList)
