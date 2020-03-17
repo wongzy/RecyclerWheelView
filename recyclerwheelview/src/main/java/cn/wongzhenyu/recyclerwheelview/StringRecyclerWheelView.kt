@@ -21,8 +21,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
     private var onSelectedStringCallback : OnSelectedStringCallback? = null
-    private var isMeasureFirst = true
-    private var offsetY : Int = 0
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -114,6 +112,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
     private fun updateStringsAndNotify() {
         logDebug("updateStringsAndNotify")
         scrollToPosition(0)
+        //set this attributes to true, make it measure child view height again to fix ui offset problem
         isMeasureFirst = true
         pointY = 0
         val stringRecyclerWheelViewAdapter = adapter as StringRecyclerWheelViewAdapter
@@ -143,18 +142,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
                 stringRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
             }
         })
-    }
-
-    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
-        super.onLayout(changed, l, t, r, b)
-        if (isMeasureFirst) {
-            val childView = getChildAt(1)
-            if (null != childView) {
-                offsetY = childView.height / 2
-                scrollBy(0, offsetY)
-                isMeasureFirst = false
-            }
-        }
     }
 
     /**

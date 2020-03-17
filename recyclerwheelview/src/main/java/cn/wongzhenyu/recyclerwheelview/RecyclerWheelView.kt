@@ -14,7 +14,18 @@ import cn.wongzhenyu.recyclerwheelview.util.logError
 
 abstract class RecyclerWheelView : RecyclerView {
 
+    /**
+     * all scrolled Y
+     */
     protected var pointY = 0
+    /**
+     * padding item redundant offset Y, we should scroll it before RecyclerWheelView has shown
+     */
+    private var offsetY : Int = 0
+    /**
+     * whether need to fix paddding redundant offset in onLayout method
+     */
+    protected var isMeasureFirst = true
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)
 
@@ -44,6 +55,19 @@ abstract class RecyclerWheelView : RecyclerView {
     fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
         logDebug("setRecyclerWheelViewAdapter")
         adapter = recyclerWheelViewAdapter
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        super.onLayout(changed, l, t, r, b)
+        //get first string item height, fix ui offset problem
+        if (isMeasureFirst) {
+            val childView = getChildAt(1)
+            if (null != childView) {
+                offsetY = childView.height / 2
+                scrollBy(0, offsetY)
+                isMeasureFirst = false
+            }
+        }
     }
 
     @Deprecated(
