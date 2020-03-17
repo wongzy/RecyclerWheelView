@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.dp2px
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logError
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
 import cn.wongzhenyu.recyclerwheelview.util.sp2px
 
@@ -20,6 +21,8 @@ class StringRecyclerWheelView : RecyclerWheelView {
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
     private var onSelectedStringCallback : OnSelectedStringCallback? = null
+    private var isMeasureFirst = true
+    private var offsetY : Int = 0
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -86,12 +89,35 @@ class StringRecyclerWheelView : RecyclerWheelView {
     }
 
 
+    /**
+     * set strings list
+     */
     fun setStringItemList(stringList: MutableList<String>) {
         //todo update strings when string list existed
         logInfo("setStringItemList size = ${stringList.size}")
+        if (stringList.isEmpty()) {
+            logError("string list is empty, please add elements to it!")
+            return
+        }
         this.stringItemList.clear()
         this.stringItemList.addAll(stringList)
-        initAdapterAndScrollener()
+        if (null == adapter) {
+            initAdapterAndScrollener()
+        } else {
+            updateStringsAndNotify()
+        }
+    }
+
+    /**
+     * update strings and scrolled length
+     */
+    private fun updateStringsAndNotify() {
+        logDebug("updateStringsAndNotify")
+        scrollToPosition(0)
+        isMeasureFirst = true
+        pointY = 0
+        val stringRecyclerWheelViewAdapter = adapter as StringRecyclerWheelViewAdapter
+        stringRecyclerWheelViewAdapter.resetScroll(onSelectedStringCallback)
     }
 
     /**
@@ -99,22 +125,36 @@ class StringRecyclerWheelView : RecyclerWheelView {
      */
     private fun initAdapterAndScrollener() {
         logInfo("initAdapterAndScrollener")
-        val singleRecyclerWheelViewAdapter =
+        val stringRecyclerWheelViewAdapter =
             StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         val snapHelper = LinearSnapHelper()
         snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
-        setRecyclerWheelViewAdapter(singleRecyclerWheelViewAdapter)
+        setRecyclerWheelViewAdapter(stringRecyclerWheelViewAdapter)
         //invoke onSelectedStringCallback first before add ScrollListener
-        singleRecyclerWheelViewAdapter.notifyScroll(0, onSelectedStringCallback)
+        scrollToPosition(0)
+        pointY = 0
+        stringRecyclerWheelViewAdapter.notifyScroll(0, onSelectedStringCallback)
         addOnScrollListener(object : OnScrollListener() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 logDebug("scrollListener onScrolled")
                 super.onScrolled(recyclerView, dx, dy)
                 pointY += dy
-                singleRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
+                stringRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
             }
         })
+    }
+
+    override fun onLayout(changed: Boolean, l: Int, t: Int, r: Int, b: Int) {
+        super.onLayout(changed, l, t, r, b)
+        if (isMeasureFirst) {
+            val childView = getChildAt(1)
+            if (null != childView) {
+                offsetY = childView.height / 2
+                scrollBy(0, offsetY)
+                isMeasureFirst = false
+            }
+        }
     }
 
     /**

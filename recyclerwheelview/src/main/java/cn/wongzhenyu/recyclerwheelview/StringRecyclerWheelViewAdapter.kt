@@ -84,5 +84,18 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         }
     }
 
+    /**
+     * reset data
+     */
+    fun resetScroll(selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
+        logDebug("resetScroll")
+        selectedItem = 1
+        notifyDataSetChanged()
+        val selectedStringPosition = selectedItem - 1
+        if (selectedStringPosition in 0 until  stringList.size) {
+            selectedStringCallback?.onSelectedString(stringList[selectedItem - 1])
+        }
+    }
+
 
 }

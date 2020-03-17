@@ -18,6 +18,7 @@ class StringWheelViewTest : AppCompatActivity() {
     private lateinit var stringRecyclerWheelView: StringRecyclerWheelView
     private lateinit var tvValue : TextView
     private val tag = "StringWheelViewTest"
+    private var clickTime = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d(tag, "onCreate")
@@ -34,6 +35,13 @@ class StringWheelViewTest : AppCompatActivity() {
             }
         })
         stringRecyclerWheelView.setStringItemList(stringList)
+        update_string_button.setOnClickListener {
+            stringList = MutableList(20, init = {
+                "new value $it $clickTime"
+            })
+            clickTime ++
+            stringRecyclerWheelView.setStringItemList(stringList)
+        }
     }
 
     override fun onResume() {

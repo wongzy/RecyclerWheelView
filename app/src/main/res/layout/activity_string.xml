@@ -10,7 +10,14 @@
             android:gravity="center"
             android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="150dp"/>
+    <TextView
+            android:id="@+id/update_string_button"
+            android:gravity="center"
+            android:background="@android:color/holo_blue_dark"
+            android:text="update strings"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"/>
     <cn.wongzhenyu.recyclerwheelview.StringRecyclerWheelView
             android:id="@+id/string_wheel_view"
             android:layout_width="match_parent"
