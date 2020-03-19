@@ -5,11 +5,7 @@ import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import cn.wongzhenyu.recyclerwheelview.util.dp2px
-import cn.wongzhenyu.recyclerwheelview.util.logDebug
-import cn.wongzhenyu.recyclerwheelview.util.logError
-import cn.wongzhenyu.recyclerwheelview.util.logInfo
-import cn.wongzhenyu.recyclerwheelview.util.sp2px
+import cn.wongzhenyu.recyclerwheelview.util.*
 
 /**
  * github wongzy
@@ -20,7 +16,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
-    private var onSelectedStringCallback : OnSelectedStringCallback? = null
+    private var onSelectedStringCallback: OnSelectedStringCallback? = null
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -119,6 +115,13 @@ class StringRecyclerWheelView : RecyclerWheelView {
         stringRecyclerWheelViewAdapter.resetScroll(onSelectedStringCallback)
     }
 
+    @Deprecated(
+        "do not set adapter in StringRecyclerWheelView, just use setStringItemList instead"
+    )
+    override fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
+        super.setRecyclerWheelViewAdapter(recyclerWheelViewAdapter)
+    }
+
     /**
      * init attributes and set adapter
      */
@@ -151,6 +154,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
         /**
          * get selected string
          */
-        fun onSelectedString(selectedString : String)
+        fun onSelectedString(selectedString: String)
     }
 }

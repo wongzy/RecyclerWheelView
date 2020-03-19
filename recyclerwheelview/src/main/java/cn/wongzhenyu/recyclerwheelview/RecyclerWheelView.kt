@@ -52,7 +52,7 @@ abstract class RecyclerWheelView : RecyclerView {
     /**
      * set adapter
      */
-    fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
+    open fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
         logDebug("setRecyclerWheelViewAdapter")
         adapter = recyclerWheelViewAdapter
     }
