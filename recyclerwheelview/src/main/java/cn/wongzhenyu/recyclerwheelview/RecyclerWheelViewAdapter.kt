@@ -39,6 +39,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
         if (viewType == typePadding) {
             return onCreatePaddingItemViewHolder(parent)
         }
+        //todo measure itemViewHolder's height set scrollListener
         return onCreateItemViewHolder(parent)
     }
 

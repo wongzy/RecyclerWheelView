@@ -2,6 +2,7 @@ package cn.wongzhenyu.recyclerwheelview
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logError
@@ -12,7 +13,7 @@ import cn.wongzhenyu.recyclerwheelview.util.logError
  * 2020-02-05
  **/
 
-abstract class RecyclerWheelView : RecyclerView {
+open class RecyclerWheelView : RecyclerView {
 
     /**
      * all scrolled Y
@@ -46,6 +47,7 @@ abstract class RecyclerWheelView : RecyclerView {
             logError("adapter is not a instance of RecyclerWheelViewAdapter")
             throw IllegalArgumentException("adapter is not a instance of RecyclerWheelViewAdapter")
         }
+        layoutManager = LinearLayoutManager(context, VERTICAL, false)
         super.setAdapter(adapter)
     }
 
