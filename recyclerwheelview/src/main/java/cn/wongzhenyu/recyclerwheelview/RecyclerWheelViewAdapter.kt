@@ -140,7 +140,9 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
         super.onViewAttachedToWindow(holder)
         if (holder.itemViewType == typeItem) {
             if (itemHeight == 0) {
-                itemHeight = holder.itemView.layoutParams.height
+                val view = holder.itemView
+                view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+                itemHeight = view.measuredHeight
             }
         }
     }
