@@ -70,8 +70,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
             wheelNormalItemBackground
         )
         attrs.recycle()
-        //remove change item animator
-        itemAnimator = null
         logInfo("init recyclerWheelViewItemInfo = $recyclerWheelViewItemInfo")
     }
 
@@ -130,21 +128,12 @@ class StringRecyclerWheelView : RecyclerWheelView {
         val stringRecyclerWheelViewAdapter =
             StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
-        val snapHelper = LinearSnapHelper()
-        snapHelper.attachToRecyclerView(this@StringRecyclerWheelView)
         setRecyclerWheelViewAdapter(stringRecyclerWheelViewAdapter)
         //invoke onSelectedStringCallback first before add ScrollListener
         scrollToPosition(0)
         pointY = 0
         stringRecyclerWheelViewAdapter.notifyScroll(0, onSelectedStringCallback)
-        addOnScrollListener(object : OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                logDebug("scrollListener onScrolled")
-                super.onScrolled(recyclerView, dx, dy)
-                pointY += dy
-                stringRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
-            }
-        })
+        addScrollListener()
     }
 
     /**

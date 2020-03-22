@@ -1,6 +1,7 @@
 package cn.wongzhenyu.recyclerwheelview
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
@@ -18,7 +19,9 @@ private const val typeItem = 1
 
 abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-    protected var selectedItem = 1
+    private var selectedItem = 1
+    protected var itemHeight = 0
+
 
     /**
      * the index of start and end are padding item's index, not included in valid item
@@ -39,8 +42,40 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
         if (viewType == typePadding) {
             return onCreatePaddingItemViewHolder(parent)
         }
-        //todo measure itemViewHolder's height set scrollListener
         return onCreateItemViewHolder(parent)
+    }
+
+    /**
+     * calculate selected item and notify
+     */
+    fun notifyScroll(scrolledY: Int, selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
+        logInfo("notifyScroll scrolledY = $scrolledY")
+        val newSelectedItem =
+            scrolledY / itemHeight+ 1
+        val oldSelectedItem = selectedItem
+        logInfo("oldSelectedItem = $oldSelectedItem, newSelectedItem = $newSelectedItem")
+        if (newSelectedItem != oldSelectedItem) {
+            selectedItem = newSelectedItem
+            notifyItemChanged(oldSelectedItem)
+            notifyItemChanged(newSelectedItem)
+        }
+        val selectedStringPosition = newSelectedItem - 1
+//        if (selectedStringPosition in 0 until  stringList.size) {
+//            selectedStringCallback?.onSelectedString(stringList[newSelectedItem - 1])
+//        }
+    }
+
+    /**
+     * reset data
+     */
+    fun resetScroll(selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
+        logDebug("resetScroll")
+        selectedItem = 1
+        notifyDataSetChanged()
+        val selectedStringPosition = selectedItem - 1
+//        if (selectedStringPosition in 0 until  stringList.size) {
+//            selectedStringCallback?.onSelectedString(stringList[selectedItem - 1])
+//        }
     }
 
 
@@ -99,5 +134,14 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     private fun isSelectedItem(position: Int): Boolean {
         logInfo("isSelectedItem position = $position selectedItem = $selectedItem")
         return position == selectedItem
+    }
+
+    override fun onViewAttachedToWindow(holder: RecyclerView.ViewHolder) {
+        super.onViewAttachedToWindow(holder)
+        if (holder.itemViewType == typeItem) {
+            if (itemHeight == 0) {
+                itemHeight = holder.itemView.layoutParams.height
+            }
+        }
     }
 }

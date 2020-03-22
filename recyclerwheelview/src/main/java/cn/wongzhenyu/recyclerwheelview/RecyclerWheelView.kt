@@ -3,6 +3,7 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logError
@@ -28,15 +29,23 @@ open class RecyclerWheelView : RecyclerView {
      */
     protected var isMeasureFirst = true
 
-    constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet)
+    var onScrollListenerDefault : OnScrollListener? = null
 
-    constructor(context: Context) : super(context)
+    constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
+        itemAnimator = null
+    }
+
+    constructor(context: Context) : super(context) {
+        itemAnimator = null
+    }
 
     constructor(context: Context, attributeSet: AttributeSet?, defStyleAttr: Int) : super(
         context,
         attributeSet,
         defStyleAttr
-    )
+    ) {
+        itemAnimator = null
+    }
 
     @Deprecated(
         "setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter<*>?) instead of setAdapter(adapter: Adapter<*>?)"
@@ -49,6 +58,7 @@ open class RecyclerWheelView : RecyclerView {
         }
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         super.setAdapter(adapter)
+        addScrollListener()
     }
 
     /**
@@ -56,6 +66,8 @@ open class RecyclerWheelView : RecyclerView {
      */
     open fun setRecyclerWheelViewAdapter(recyclerWheelViewAdapter: RecyclerWheelViewAdapter) {
         logDebug("setRecyclerWheelViewAdapter")
+        val snapHelper = LinearSnapHelper()
+        snapHelper.attachToRecyclerView(this)
         adapter = recyclerWheelViewAdapter
     }
 
@@ -80,5 +92,21 @@ open class RecyclerWheelView : RecyclerView {
         super.setLayoutManager(layout)
     }
 
-
+    protected fun addScrollListener() {
+        if (onScrollListenerDefault == null) {
+            onScrollListenerDefault = object : OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    logDebug("scrollListener onScrolled")
+                    super.onScrolled(recyclerView, dx, dy)
+                    pointY += dy
+                    if (adapter is RecyclerWheelViewAdapter) {
+                        val recyclerWheelViewAdapter = adapter as RecyclerWheelViewAdapter
+                        recyclerWheelViewAdapter.notifyScroll(pointY, null)
+                    }
+//                stringRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
+                }
+            }
+            addOnScrollListener(onScrollListenerDefault!!)
+        }
+    }
 }

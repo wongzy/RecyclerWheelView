@@ -25,6 +25,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     ) {
         this.stringList = stringList
         this.recyclerWheelViewItemInfo = recyclerWheelViewItemInfo
+        itemHeight = recyclerWheelViewItemInfo.wheelItemHeight
     }
 
     override fun onBindSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -62,39 +63,6 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
 
     class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         internal val contentView: TextView = itemView.findViewById(R.id.tv_content)
-    }
-
-    /**
-     * calculate selected item and notify
-     */
-    fun notifyScroll(scrolledY: Int, selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
-        logInfo("notifyScroll scrolledY = $scrolledY")
-        val newSelectedItem =
-            scrolledY / recyclerWheelViewItemInfo.wheelItemHeight + 1
-        val oldSelectedItem = selectedItem
-        logInfo("oldSelectedItem = $oldSelectedItem, newSelectedItem = $newSelectedItem")
-        if (newSelectedItem != oldSelectedItem) {
-            selectedItem = newSelectedItem
-            notifyItemChanged(oldSelectedItem)
-            notifyItemChanged(newSelectedItem)
-        }
-        val selectedStringPosition = newSelectedItem - 1
-        if (selectedStringPosition in 0 until  stringList.size) {
-            selectedStringCallback?.onSelectedString(stringList[newSelectedItem - 1])
-        }
-    }
-
-    /**
-     * reset data
-     */
-    fun resetScroll(selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
-        logDebug("resetScroll")
-        selectedItem = 1
-        notifyDataSetChanged()
-        val selectedStringPosition = selectedItem - 1
-        if (selectedStringPosition in 0 until  stringList.size) {
-            selectedStringCallback?.onSelectedString(stringList[selectedItem - 1])
-        }
     }
 
 
