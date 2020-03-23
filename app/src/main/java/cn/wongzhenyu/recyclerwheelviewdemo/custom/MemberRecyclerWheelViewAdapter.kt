@@ -1,6 +1,7 @@
 package cn.wongzhenyu.recyclerwheelviewdemo.custom
 
 import android.graphics.Color
+import android.util.Log
 import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +19,14 @@ import cn.wongzhenyu.recyclerwheelviewdemo.R
 class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
 
     private val memberList = ArrayList<Member>()
+    private var onSelectedMemberCallBack : OnSelectedMemberCallBack? = null
 
     constructor(memberList: MutableList<Member>) {
         this.memberList.addAll(memberList)
+    }
+
+    fun setOnSelectedMemberCallBack(onSelectedMemberCallBack: OnSelectedMemberCallBack) {
+        this.onSelectedMemberCallBack = onSelectedMemberCallBack
     }
 
     override fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
@@ -53,9 +59,21 @@ class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         return memberList.size
     }
 
+    override fun onSelectedItemPosition(position: Int) {
+        if (position in  memberList.indices) {
+            onSelectedMemberCallBack?.onSelectedMamber(memberList[position])
+        } else {
+            Log.e("recyclerwheelview", "onSelectedItemPosition error")
+        }
+    }
+
     class MemberViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val nameView : TextView = view.findViewById(R.id.member_name)
-        val ageView : TextView = view.findViewById(R.id.member_age)
-        val sexView : TextView = view.findViewById(R.id.member_sex)
+        val nameView: TextView = view.findViewById(R.id.member_name)
+        val ageView: TextView = view.findViewById(R.id.member_age)
+        val sexView: TextView = view.findViewById(R.id.member_sex)
+    }
+
+    interface OnSelectedMemberCallBack {
+        fun onSelectedMamber(member: Member)
     }
 }

@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logError
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
+import java.util.*
 
 /**
  * github wongzy
@@ -48,7 +49,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     /**
      * calculate selected item and notify
      */
-    fun notifyScroll(scrolledY: Int, selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
+    fun notifyScroll(scrolledY: Int) {
         logInfo("notifyScroll scrolledY = $scrolledY")
         val newSelectedItem =
             scrolledY / itemHeight+ 1
@@ -60,22 +61,20 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
             notifyItemChanged(newSelectedItem)
         }
         val selectedStringPosition = newSelectedItem - 1
-//        if (selectedStringPosition in 0 until  stringList.size) {
-//            selectedStringCallback?.onSelectedString(stringList[newSelectedItem - 1])
-//        }
+        onSelectedItemPosition(selectedStringPosition)
     }
+
+    abstract fun onSelectedItemPosition(position: Int)
 
     /**
      * reset data
      */
-    fun resetScroll(selectedStringCallback: StringRecyclerWheelView.OnSelectedStringCallback?) {
+    fun  resetScroll() {
         logDebug("resetScroll")
         selectedItem = 1
         notifyDataSetChanged()
         val selectedStringPosition = selectedItem - 1
-//        if (selectedStringPosition in 0 until  stringList.size) {
-//            selectedStringCallback?.onSelectedString(stringList[selectedItem - 1])
-//        }
+        onSelectedItemPosition(selectedStringPosition)
     }
 
 

@@ -3,8 +3,6 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.*
 
 /**
@@ -16,7 +14,14 @@ class StringRecyclerWheelView : RecyclerWheelView {
 
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
-    private var onSelectedStringCallback: OnSelectedStringCallback? = null
+
+    companion object{
+        internal var onSelectedStringCallback: OnSelectedStringCallback? = null
+    }
+
+    fun setOnSelectedStringCallback(onSelectedStringCallback: OnSelectedStringCallback?) {
+        StringRecyclerWheelView.onSelectedStringCallback = onSelectedStringCallback
+    }
 
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
@@ -73,12 +78,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
         logInfo("init recyclerWheelViewItemInfo = $recyclerWheelViewItemInfo")
     }
 
-    /**
-     * set OnSelectedStringCallback to get selected String
-     */
-    fun setOnSelectedStringCallback(onSelectedStringCallback: OnSelectedStringCallback) {
-        this.onSelectedStringCallback = onSelectedStringCallback
-    }
 
 
     /**
@@ -110,7 +109,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
         isMeasureFirst = true
         pointY = 0
         val stringRecyclerWheelViewAdapter = adapter as StringRecyclerWheelViewAdapter
-        stringRecyclerWheelViewAdapter.resetScroll(onSelectedStringCallback)
+        stringRecyclerWheelViewAdapter.resetScroll()
     }
 
     @Deprecated(
@@ -129,10 +128,10 @@ class StringRecyclerWheelView : RecyclerWheelView {
             StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
         setRecyclerWheelViewAdapter(stringRecyclerWheelViewAdapter)
-        //invoke onSelectedStringCallback first before add ScrollListener
+        //invoke onSelectedItemCallback first before add ScrollListener
         scrollToPosition(0)
         pointY = 0
-        stringRecyclerWheelViewAdapter.notifyScroll(0, onSelectedStringCallback)
+        stringRecyclerWheelViewAdapter.notifyScroll(0)
         addScrollListener()
     }
 

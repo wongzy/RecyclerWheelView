@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
+import cn.wongzhenyu.recyclerwheelview.util.logError
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
 
 /**
@@ -65,5 +66,12 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         internal val contentView: TextView = itemView.findViewById(R.id.tv_content)
     }
 
+    override fun onSelectedItemPosition(position: Int) {
+        if (position in stringList.indices) {
+            StringRecyclerWheelView.onSelectedStringCallback?.onSelectedString(stringList[position])
+        } else {
+            logError("onSelectedItemPosition is wrong!")
+        }
+    }
 
 }

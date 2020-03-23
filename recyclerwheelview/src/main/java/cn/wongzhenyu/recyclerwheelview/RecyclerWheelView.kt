@@ -29,7 +29,7 @@ open class RecyclerWheelView : RecyclerView {
      */
     protected var isMeasureFirst = true
 
-    var onScrollListenerDefault : OnScrollListener? = null
+    private var onScrollListenerDefault : OnScrollListener? = null
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
         itemAnimator = null
@@ -101,9 +101,8 @@ open class RecyclerWheelView : RecyclerView {
                     pointY += dy
                     if (adapter is RecyclerWheelViewAdapter) {
                         val recyclerWheelViewAdapter = adapter as RecyclerWheelViewAdapter
-                        recyclerWheelViewAdapter.notifyScroll(pointY, null)
+                        recyclerWheelViewAdapter.notifyScroll(pointY)
                     }
-//                stringRecyclerWheelViewAdapter.notifyScroll(pointY, onSelectedStringCallback)
                 }
             }
             addOnScrollListener(onScrollListenerDefault!!)

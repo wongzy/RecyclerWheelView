@@ -25,6 +25,11 @@ class CustomWheelViewTest : AppCompatActivity() {
             Member(it, "member $it", 0, "unKnow", "none")
         })
         val memberAdapter = MemberRecyclerWheelViewAdapter(memberList)
+        memberAdapter.setOnSelectedMemberCallBack(object : MemberRecyclerWheelViewAdapter.OnSelectedMemberCallBack{
+            override fun onSelectedMamber(member: Member) {
+                tv_string_vale.text = "${member.name} age = ${member.age}"
+            }
+        })
         recycler_wheel_view.setRecyclerWheelViewAdapter(memberAdapter)
     }
 
