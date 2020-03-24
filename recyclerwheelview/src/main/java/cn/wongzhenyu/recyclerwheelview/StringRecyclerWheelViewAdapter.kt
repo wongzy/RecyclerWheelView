@@ -36,6 +36,11 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelSelectedItemTextColor)
         itemViewHolderSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelSelectedItemTextSize.toFloat()
+        if (null != recyclerWheelViewItemInfo.wheelSelectedItemBackground) {
+            itemViewHolderSelected.contentView.background = recyclerWheelViewItemInfo.wheelSelectedItemBackground
+        } else {
+            itemViewHolderSelected.contentView.background = null
+        }
     }
 
     override fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -45,6 +50,11 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderUnSelected.contentView.setTextColor(recyclerWheelViewItemInfo.wheelNormalTextColor)
         itemViewHolderUnSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelNormalTextSize.toFloat()
+        if (null != recyclerWheelViewItemInfo.wheelNormalItemBackground) {
+            itemViewHolderUnSelected.contentView.background = recyclerWheelViewItemInfo.wheelNormalItemBackground
+        } else{
+            itemViewHolderUnSelected.contentView.background = null
+        }
     }
 
     override fun getWheelItemCount(): Int {

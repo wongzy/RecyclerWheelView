@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_height="match_parent">
 
@@ -20,6 +21,8 @@
             android:layout_height="50dp"/>
     <cn.wongzhenyu.recyclerwheelview.StringRecyclerWheelView
             android:id="@+id/string_wheel_view"
+            app:wheelSelectedItemBackground="@drawable/string_wheel_bg"
+            app:wheelNormalItemBackground="@drawable/string_nor_wheel_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 </LinearLayout>

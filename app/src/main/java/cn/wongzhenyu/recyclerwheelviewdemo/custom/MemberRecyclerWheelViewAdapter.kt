@@ -39,20 +39,30 @@ class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         val memberViewHolder = holder as MemberViewHolder
         val member = memberList[position]
         memberViewHolder.nameView.text = member.name
-        memberViewHolder.nameView.setTextColor(Color.BLACK)
+        memberViewHolder.nameView.setTextColor(Color.WHITE)
         memberViewHolder.nameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18f)
+        memberViewHolder.nameView.setBackgroundColor(Color.BLUE)
         memberViewHolder.ageView.text = member.age.toString()
+        memberViewHolder.ageView.setTextColor(Color.WHITE)
+        memberViewHolder.ageView.setBackgroundColor(Color.BLUE)
         memberViewHolder.sexView.text = member.sex
+        memberViewHolder.sexView.setTextColor(Color.WHITE)
+        memberViewHolder.sexView.setBackgroundColor(Color.BLUE)
     }
 
     override fun onBindNotSelectedViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val memberViewHolder = holder as MemberViewHolder
         val member = memberList[position]
         memberViewHolder.nameView.text = member.name
-        memberViewHolder.nameView.setTextColor(Color.WHITE)
+        memberViewHolder.nameView.setTextColor(Color.BLACK)
         memberViewHolder.nameView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 16f)
+        memberViewHolder.nameView.setBackgroundColor(Color.TRANSPARENT)
         memberViewHolder.ageView.text = member.age.toString()
+        memberViewHolder.ageView.setTextColor(Color.BLACK)
+        memberViewHolder.ageView.setBackgroundColor(Color.TRANSPARENT)
         memberViewHolder.sexView.text = member.sex
+        memberViewHolder.sexView.setTextColor(Color.BLACK)
+        memberViewHolder.sexView.setBackgroundColor(Color.TRANSPARENT)
     }
 
     override fun getWheelItemCount(): Int {
