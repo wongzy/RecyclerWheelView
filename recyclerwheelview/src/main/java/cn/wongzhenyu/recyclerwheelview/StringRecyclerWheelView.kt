@@ -3,7 +3,10 @@ package cn.wongzhenyu.recyclerwheelview
 import android.content.Context
 import android.util.AttributeSet
 import androidx.recyclerview.widget.LinearLayoutManager
-import cn.wongzhenyu.recyclerwheelview.util.*
+import cn.wongzhenyu.recyclerwheelview.util.dp2px
+import cn.wongzhenyu.recyclerwheelview.util.logError
+import cn.wongzhenyu.recyclerwheelview.util.logInfo
+import cn.wongzhenyu.recyclerwheelview.util.sp2px
 
 /**
  * github wongzy
@@ -15,7 +18,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
     private lateinit var recyclerWheelViewItemInfo: RecyclerWheelViewItemInfo
     private val stringItemList: MutableList<String> = ArrayList()
 
-    companion object{
+    companion object {
         internal var onSelectedStringCallback: OnSelectedStringCallback? = null
     }
 
@@ -79,7 +82,6 @@ class StringRecyclerWheelView : RecyclerWheelView {
     }
 
 
-
     /**
      * set strings list
      */
@@ -95,21 +97,8 @@ class StringRecyclerWheelView : RecyclerWheelView {
         if (null == adapter) {
             initAdapterAndScrollener()
         } else {
-            updateStringsAndNotify()
+            updateDataAndNotify()
         }
-    }
-
-    /**
-     * update strings and scrolled length
-     */
-    private fun updateStringsAndNotify() {
-        logDebug("updateStringsAndNotify")
-        scrollToPosition(0)
-        //set this attributes to true, make it measure child view height again to fix ui offset problem
-        isMeasureFirst = true
-        pointY = 0
-        val stringRecyclerWheelViewAdapter = adapter as StringRecyclerWheelViewAdapter
-        stringRecyclerWheelViewAdapter.resetScroll()
     }
 
     @Deprecated(

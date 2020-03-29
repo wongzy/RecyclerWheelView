@@ -29,6 +29,11 @@ class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         this.onSelectedMemberCallBack = onSelectedMemberCallBack
     }
 
+    fun updateData(newMemberList: MutableList<Member>) {
+        this.memberList.clear()
+        this.memberList.addAll(newMemberList)
+    }
+
     override fun onCreateItemViewHolder(parent: ViewGroup): RecyclerView.ViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.layout_member_wheel_view, parent, false)

@@ -108,4 +108,17 @@ open class RecyclerWheelView : RecyclerView {
             addOnScrollListener(onScrollListenerDefault!!)
         }
     }
+
+    /**
+     * update strings and scrolled length
+     */
+    fun updateDataAndNotify() {
+        logDebug("updateDataAndNotify")
+        scrollToPosition(0)
+        //set this attributes to true, make it measure child view height again to fix ui offset problem
+        isMeasureFirst = true
+        pointY = 0
+        val stringRecyclerWheelViewAdapter = adapter as RecyclerWheelViewAdapter
+        stringRecyclerWheelViewAdapter.resetScroll()
+    }
 }

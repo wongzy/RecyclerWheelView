@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import cn.wongzhenyu.recyclerwheelviewdemo.custom.Member
 import cn.wongzhenyu.recyclerwheelviewdemo.custom.MemberRecyclerWheelViewAdapter
 import kotlinx.android.synthetic.main.activity_custom.*
+import java.util.*
 
 /**
  * github wongzy
@@ -31,6 +32,13 @@ class CustomWheelViewTest : AppCompatActivity() {
             }
         })
         recycler_wheel_view.setRecyclerWheelViewAdapter(memberAdapter)
+        update_data_button.setOnClickListener {
+            val newMemberList = MutableList(20, init = {
+                Member(it + 1, "new member ${Random().nextInt(100)}  $it", 0, "new unKnow", "new none")
+            })
+            memberAdapter.updateData(newMemberList)
+            recycler_wheel_view.updateDataAndNotify()
+        }
     }
 
     override fun onResume() {

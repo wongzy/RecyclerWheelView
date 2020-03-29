@@ -11,6 +11,12 @@
             android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
             android:layout_height="200dp"/>
+    <Button
+            android:id="@+id/update_data_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="update"
+            />
 
     <cn.wongzhenyu.recyclerwheelview.RecyclerWheelView
             android:id="@+id/recycler_wheel_view"
