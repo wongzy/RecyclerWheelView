@@ -26,7 +26,8 @@ class CustomWheelViewTest : AppCompatActivity() {
             Member(it, "member $it", 0, "unKnow", "none")
         })
         val memberAdapter = MemberRecyclerWheelViewAdapter(memberList)
-        memberAdapter.setOnSelectedMemberCallBack(object : MemberRecyclerWheelViewAdapter.OnSelectedMemberCallBack{
+        memberAdapter.setOnSelectedMemberCallBack(object :
+            MemberRecyclerWheelViewAdapter.OnSelectedMemberCallBack {
             override fun onSelectedMamber(member: Member) {
                 tv_string_vale.text = "${member.name} age = ${member.age}"
             }
@@ -34,7 +35,13 @@ class CustomWheelViewTest : AppCompatActivity() {
         recycler_wheel_view.setRecyclerWheelViewAdapter(memberAdapter)
         update_data_button.setOnClickListener {
             val newMemberList = MutableList(20, init = {
-                Member(it + 1, "new member ${Random().nextInt(100)}  $it", 0, "new unKnow", "new none")
+                Member(
+                    it + 1,
+                    "new member ${Random().nextInt(100)}  $it",
+                    0,
+                    "new unKnow",
+                    "new none"
+                )
             })
             memberAdapter.updateData(newMemberList)
             recycler_wheel_view.updateDataAndNotify()

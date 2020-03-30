@@ -19,7 +19,7 @@ import cn.wongzhenyu.recyclerwheelviewdemo.R
 class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
 
     private val memberList = ArrayList<Member>()
-    private var onSelectedMemberCallBack : OnSelectedMemberCallBack? = null
+    private var onSelectedMemberCallBack: OnSelectedMemberCallBack? = null
 
     constructor(memberList: MutableList<Member>) {
         this.memberList.addAll(memberList)
@@ -75,7 +75,7 @@ class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
     }
 
     override fun onSelectedItemPosition(position: Int) {
-        if (position in  memberList.indices) {
+        if (position in memberList.indices) {
             onSelectedMemberCallBack?.onSelectedMamber(memberList[position])
         } else {
             Log.e("recyclerwheelview", "onSelectedItemPosition error")

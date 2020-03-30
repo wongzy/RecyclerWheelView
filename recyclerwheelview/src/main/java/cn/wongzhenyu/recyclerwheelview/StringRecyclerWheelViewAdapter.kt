@@ -37,7 +37,8 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelSelectedItemTextSize.toFloat()
         if (null != recyclerWheelViewItemInfo.wheelSelectedItemBackground) {
-            itemViewHolderSelected.contentView.background = recyclerWheelViewItemInfo.wheelSelectedItemBackground
+            itemViewHolderSelected.contentView.background =
+                recyclerWheelViewItemInfo.wheelSelectedItemBackground
         } else {
             itemViewHolderSelected.contentView.background = null
         }
@@ -51,8 +52,9 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         itemViewHolderUnSelected.contentView.textSize =
             recyclerWheelViewItemInfo.wheelNormalTextSize.toFloat()
         if (null != recyclerWheelViewItemInfo.wheelNormalItemBackground) {
-            itemViewHolderUnSelected.contentView.background = recyclerWheelViewItemInfo.wheelNormalItemBackground
-        } else{
+            itemViewHolderUnSelected.contentView.background =
+                recyclerWheelViewItemInfo.wheelNormalItemBackground
+        } else {
             itemViewHolderUnSelected.contentView.background = null
         }
     }
@@ -66,7 +68,7 @@ internal class StringRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         logDebug("onCreateItemViewHolder")
         val rootView = LayoutInflater.from(parent.context)
             .inflate(R.layout.view_nor_recycler_wheel_view, parent, false)
-        val layoutParams = rootView.layoutParams;
+        val layoutParams = rootView.layoutParams
         layoutParams.height = recyclerWheelViewItemInfo.wheelItemHeight
         rootView.layoutParams = layoutParams
         return ItemViewHolder(rootView)

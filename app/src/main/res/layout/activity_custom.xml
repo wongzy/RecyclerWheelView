@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
             android:id="@+id/tv_string_vale"
-            android:text="selected value :"
-            android:gravity="center"
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="200dp"/>
+            android:layout_height="200dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:text="selected value :" />
+
     <Button
             android:id="@+id/update_data_button"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="update"
-            />
+            android:text="update" />
 
     <cn.wongzhenyu.recyclerwheelview.RecyclerWheelView
             android:id="@+id/recycler_wheel_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent" />
 </LinearLayout>

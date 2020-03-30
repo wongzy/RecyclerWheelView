@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import cn.wongzhenyu.recyclerwheelview.util.logDebug
 import cn.wongzhenyu.recyclerwheelview.util.logError
 import cn.wongzhenyu.recyclerwheelview.util.logInfo
-import java.util.*
 
 /**
  * github wongzy
@@ -52,7 +51,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     fun notifyScroll(scrolledY: Int) {
         logInfo("notifyScroll scrolledY = $scrolledY")
         val newSelectedItem =
-            scrolledY / itemHeight+ 1
+            scrolledY / itemHeight + 1
         val oldSelectedItem = selectedItem
         logInfo("oldSelectedItem = $oldSelectedItem, newSelectedItem = $newSelectedItem")
         if (newSelectedItem != oldSelectedItem) {
@@ -69,7 +68,7 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
     /**
      * reset data
      */
-    fun  resetScroll() {
+    fun resetScroll() {
         logDebug("resetScroll")
         selectedItem = 1
         notifyDataSetChanged()
@@ -145,4 +144,6 @@ abstract class RecyclerWheelViewAdapter : RecyclerView.Adapter<RecyclerView.View
             }
         }
     }
+
+
 }

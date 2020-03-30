@@ -23,13 +23,13 @@ open class RecyclerWheelView : RecyclerView {
     /**
      * padding item redundant offset Y, we should scroll it before RecyclerWheelView has shown
      */
-    private var offsetY : Int = 0
+    private var offsetY: Int = 0
     /**
      * whether need to fix paddding redundant offset in onLayout method
      */
     protected var isMeasureFirst = true
 
-    private var onScrollListenerDefault : OnScrollListener? = null
+    private var onScrollListenerDefault: OnScrollListener? = null
 
     constructor(context: Context, attributeSet: AttributeSet?) : super(context, attributeSet) {
         itemAnimator = null

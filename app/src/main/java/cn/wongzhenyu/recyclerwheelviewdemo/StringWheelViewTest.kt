@@ -14,9 +14,9 @@ import kotlinx.android.synthetic.main.activity_string.*
  **/
 class StringWheelViewTest : AppCompatActivity() {
 
-    private lateinit var stringList : MutableList<String>
+    private lateinit var stringList: MutableList<String>
     private lateinit var stringRecyclerWheelView: StringRecyclerWheelView
-    private lateinit var tvValue : TextView
+    private lateinit var tvValue: TextView
     private val tag = "StringWheelViewTest"
     private var clickTime = 1
 
@@ -29,7 +29,8 @@ class StringWheelViewTest : AppCompatActivity() {
         stringList = MutableList(20, init = {
             "value $it"
         })
-        stringRecyclerWheelView.setOnSelectedStringCallback(object : StringRecyclerWheelView.OnSelectedStringCallback{
+        stringRecyclerWheelView.setOnSelectedStringCallback(object :
+            StringRecyclerWheelView.OnSelectedStringCallback {
             override fun onSelectedString(selectedString: String) {
                 tvValue.text = "selected value : $selectedString"
             }
@@ -39,7 +40,7 @@ class StringWheelViewTest : AppCompatActivity() {
             stringList = MutableList(20, init = {
                 "new value $it $clickTime"
             })
-            clickTime ++
+            clickTime++
             stringRecyclerWheelView.setStringItemList(stringList)
         }
     }

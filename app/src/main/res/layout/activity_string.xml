@@ -1,27 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="match_parent"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
     <TextView
             android:id="@+id/tv_string_vale"
-            android:text="selected value :"
-            android:gravity="center"
-            android:background="@android:color/darker_gray"
             android:layout_width="match_parent"
-            android:layout_height="150dp"/>
+            android:layout_height="150dp"
+            android:background="@android:color/darker_gray"
+            android:gravity="center"
+            android:text="selected value :" />
+
     <TextView
             android:id="@+id/update_string_button"
-            android:gravity="center"
-            android:background="@android:color/holo_blue_dark"
-            android:text="update strings"
             android:layout_width="match_parent"
-            android:layout_height="50dp"/>
+            android:layout_height="50dp"
+            android:background="@android:color/holo_blue_dark"
+            android:gravity="center"
+            android:text="update strings" />
+
     <cn.wongzhenyu.recyclerwheelview.StringRecyclerWheelView
             android:id="@+id/string_wheel_view"
-            app:wheelSelectedItemBackground="@drawable/string_selected_wheel_bg"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
+            android:layout_height="match_parent"
+            app:wheelSelectedItemBackground="@drawable/string_selected_wheel_bg" />
 </LinearLayout>
