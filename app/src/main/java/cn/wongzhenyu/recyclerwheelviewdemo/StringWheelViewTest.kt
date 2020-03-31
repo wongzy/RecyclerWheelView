@@ -29,6 +29,7 @@ class StringWheelViewTest : AppCompatActivity() {
         stringList = MutableList(20, init = {
             "value $it"
         })
+        //set selected string call back
         stringRecyclerWheelView.setOnSelectedStringCallback(object :
             StringRecyclerWheelView.OnSelectedStringCallback {
             override fun onSelectedString(selectedString: String) {
@@ -41,6 +42,7 @@ class StringWheelViewTest : AppCompatActivity() {
                 "new value $it $clickTime"
             })
             clickTime++
+            //update string data and set location to first string
             stringRecyclerWheelView.setStringItemList(stringList)
         }
     }

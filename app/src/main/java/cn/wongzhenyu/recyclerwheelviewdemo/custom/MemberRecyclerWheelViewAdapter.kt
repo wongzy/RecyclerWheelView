@@ -74,6 +74,9 @@ class MemberRecyclerWheelViewAdapter : RecyclerWheelViewAdapter {
         return memberList.size
     }
 
+    /**
+     * @param position the location selected in your data list
+     */
     override fun onSelectedItemPosition(position: Int) {
         if (position in memberList.indices) {
             onSelectedMemberCallBack?.onSelectedMamber(memberList[position])

@@ -26,6 +26,7 @@ class CustomWheelViewTest : AppCompatActivity() {
             Member(it, "member $it", 0, "unKnow", "none")
         })
         val memberAdapter = MemberRecyclerWheelViewAdapter(memberList)
+        //set selected item callback
         memberAdapter.setOnSelectedMemberCallBack(object :
             MemberRecyclerWheelViewAdapter.OnSelectedMemberCallBack {
             override fun onSelectedMamber(member: Member) {
@@ -44,6 +45,7 @@ class CustomWheelViewTest : AppCompatActivity() {
                 )
             })
             memberAdapter.updateData(newMemberList)
+            //update data and set location to first item
             recycler_wheel_view.updateDataAndNotify()
         }
     }
