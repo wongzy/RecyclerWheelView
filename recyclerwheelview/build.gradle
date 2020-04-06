@@ -1,6 +1,17 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'wongzhenyu96'
+    groupId = 'cn.wongzhenyu'
+    artifactId = 'recyclerwheelview'
+    publishVersion = '0.0.1'
+    desc = 'A efficient WheelView based on RecyclerView, which is seay to use, and it can customed by yourself.'
+    website = 'https://github.com/wongzy/RecyclerWheelView'
+}
+
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.0"
@@ -28,5 +39,7 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    testImplementation 'junit:junit:4.12'
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
     api 'androidx.recyclerview:recyclerview:1.1.0'
 }
