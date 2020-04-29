@@ -7,7 +7,7 @@ publish {
     userOrg = 'wongzhenyu96'
     groupId = 'cn.wongzhenyu'
     artifactId = 'recyclerwheelview'
-    publishVersion = '0.0.1'
+    publishVersion = '0.0.2'
     desc = 'A efficient WheelView based on RecyclerView, which is seay to use, and it can customed by yourself.'
     website = 'https://github.com/wongzy/RecyclerWheelView'
 }
@@ -29,7 +29,7 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
