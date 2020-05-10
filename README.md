@@ -1,10 +1,10 @@
 # RecyclerWheelView
 
-a efficient WheelView  based on RecyclerView, which is seay to use, and it can customed by yourself.
+a efficient WheelView  based on RecyclerView, which is easy to use, and it can customized by yourself.
 
 ## Getting Started
 
-First of all, this lib is base on androidx, *if your library do not migrate to android, there might be some problem* if you used this.
+First of all, this lib is based on androidx, *if your library do not migrate to androidx, there might be some problems* if you used this.
 
 If you want to use this library, you should add those to your module's gradle
 
@@ -13,11 +13,11 @@ implementation 'cn.wongzhenyu:recyclerwheelview:0.0.3'
 implementation 'androidx.recyclerview:recyclerview:XXX'
 ```
 
-> Because recyclerwheelview have dependency of recyclerview(library of androidx), and to avoid the conflict of library version, I used compileonley to import recyclerview library, so you should add recyclerview by yourself.
+> Because recyclerwheelview have dependency of recyclerview(library of androidx), and to avoid the conflicts of library version, I used compileonley to import recyclerview library, so you should add recyclerview by yourself.
 
 ## Result
 
-there are two example result about recyclerwheelview in this project, if you used recyclerwheelview, you can  make this effect easily.
+there are two examples' results about recyclerwheelview in this project, if you used recyclerwheelview, you can  make this effect easily.
 
 ### String wheel view
 
