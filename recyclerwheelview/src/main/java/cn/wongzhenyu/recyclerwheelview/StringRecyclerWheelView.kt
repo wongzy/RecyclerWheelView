@@ -95,7 +95,7 @@ class StringRecyclerWheelView : RecyclerWheelView {
         this.stringItemList.clear()
         this.stringItemList.addAll(stringList)
         if (null == adapter) {
-            initAdapterAndScrollener()
+            initAdapterAndScroller()
         } else {
             updateDataAndNotify()
         }
@@ -111,8 +111,8 @@ class StringRecyclerWheelView : RecyclerWheelView {
     /**
      * init attributes and set adapter
      */
-    private fun initAdapterAndScrollener() {
-        logInfo("initAdapterAndScrollener")
+    private fun initAdapterAndScroller() {
+        logInfo("initAdapterAndScroller")
         val stringRecyclerWheelViewAdapter =
             StringRecyclerWheelViewAdapter(stringItemList, recyclerWheelViewItemInfo)
         layoutManager = LinearLayoutManager(context, VERTICAL, false)
