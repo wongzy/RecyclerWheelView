@@ -21,12 +21,12 @@ there are two example result about recyclerwheelview in this project, if you use
 
 ### String wheel view
 
-![stringrecyclerwheelview.jpeg](https://i.loli.net/2020/05/10/f8uC3jUiHFA6qZY.jpg)
-
+<img width="293" height="520" src="https://i.loli.net/2020/05/10/f8uC3jUiHFA6qZY.jpg"/>
 
 ### Custom wheel view
 
-![custom_recyclerwheelview.jpeg](https://i.loli.net/2020/05/10/WizePB59CjLK1gw.jpg)
+<img width="293" height="520" src="https://i.loli.net/2020/05/10/WizePB59CjLK1gw.jpg"/>
+
 
 
 
