@@ -36,6 +36,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
 
-    implementation project(':recyclerwheelview')
+    implementation 'cn.wongzhenyu:recyclerwheelview:0.0.3'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
 }
