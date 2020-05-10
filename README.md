@@ -1,6 +1,6 @@
 # RecyclerWheelView
 
-a efficient WheelView  based on RecyclerView, which is easy to use, and it can customized by yourself.
+An efficient WheelView  based on RecyclerView, which is easy to use, and it can customized by yourself.
 
 ## Getting Started
 
