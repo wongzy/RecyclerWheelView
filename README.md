@@ -21,13 +21,14 @@ there are two example result about recyclerwheelview in this project, if you use
 
 ### String wheel view
 
-<img width="293" height="520" src="https://i.loli.net/2020/05/10/f8uC3jUiHFA6qZY.jpg"/>
+<img width="360" height="780" src="https://i.loli.net/2020/05/10/f8uC3jUiHFA6qZY.jpg"/>
 
 ### Custom wheel view
 
-<img width="293" height="520" src="https://i.loli.net/2020/05/10/WizePB59CjLK1gw.jpg"/>
+<img width="360" height="780" src="https://i.loli.net/2020/05/10/WizePB59CjLK1gw.jpg"/>
 
+## end
 
-
+Because of the pressure of work， I do not have enough time to write document about how to use this library, you can see it in app module of this project, thinks for reading.
 
  
