@@ -1,4 +1,5 @@
 # RecyclerWheelView
+[中文文档](https://github.com/wongzy/RecyclerWheelView/blob/master/README_CHINESE.md)
 
 An efficient Android WheelView  based on RecyclerView, which is easy to use, and it can customized by yourself.
 
